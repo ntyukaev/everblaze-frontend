@@ -1,0 +1,37 @@
+@mixin layout() {
+  background: $primary-color;
+  position: absolute;
+}
+
+@mixin border ($width: 1px,
+  $style: solid,
+  $color: $secondary-color,
+  $left: false,
+  $top: false,
+  $right: false,
+  $bottom: false) {
+  
+  @if $left {
+    border-left-width: $width;
+    border-left-style: $style;
+    border-left-color: $color;
+  }
+  
+  @if $top {
+    border-top-width: $width;
+    border-top-style: $style;
+    border-top-color: $color;
+  }
+
+  @if $right {
+    border-right-width: $width;
+    border-right-style: $style;
+    border-right-color: $color;
+  }
+  
+  @if $bottom {
+    border-bottom-width: $width;
+    border-bottom-style: $style;
+    border-bottom-color: $color;
+  }
+}

@@ -1,0 +1,8 @@
+.ViewToolbar {
+  @include layout;
+  @include border($right:true);
+  width: $view-toolbar-width;
+  left: 0;
+  top: $top-menu-height;
+  height: calc(100% - $top-menu-height - $bottom-info-height);
+}

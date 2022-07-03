@@ -1,0 +1,7 @@
+.BottomInfo {
+  @include layout;
+  @include border($top: true);
+  height: $bottom-info-height;
+  width: 100%;
+  bottom: 0;
+}

@@ -1,0 +1,6 @@
+.TopMenu {
+  @include layout;
+  @include border($bottom: true);
+  height: $top-menu-height;
+  width: 100%;
+}
