@@ -1,0 +1,7 @@
+.ChartArea {
+  @include layout;
+  height: calc(100% - $tab-list-height);
+  width: 100%;
+  bottom: $tab-list-height;
+  overflow: auto;
+}

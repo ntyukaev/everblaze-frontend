@@ -1,0 +1,7 @@
+.TabList {
+  @include layout;
+  @include border($top: true);
+  height: $tab-list-height;
+  width: 100%;
+  bottom: 0;
+}

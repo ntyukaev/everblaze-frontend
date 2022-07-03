@@ -1,0 +1,5 @@
+.RightSidebar {
+  @include border($left: true);
+  background-color: $primary-color;
+  width: $right-sidebar-width;
+}

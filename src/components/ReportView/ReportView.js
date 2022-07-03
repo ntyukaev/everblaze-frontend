@@ -1,7 +1,7 @@
-import BottomInfo from '../BottomInfo'
-import Playground from '../Playground'
-import TopMenu from '../TopMenu/TopMenu'
+import TopMenu from '../TopMenu'
 import ViewToolbar from '../ViewToolbar'
+import BottomInfo from '../BottomInfo'
+import ReportPane from '../ReportPane/ReportPane'
 
 const ReportView = () => {
   return (
@@ -9,7 +9,7 @@ const ReportView = () => {
       <TopMenu/>
       <ViewToolbar/>
       <BottomInfo/>
-      <Playground/>
+      <ReportPane/>
     </>
   )
 }

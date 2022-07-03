@@ -1,0 +1,20 @@
+.ReportPane {
+  @include layout;
+  height: calc(100% - $top-menu-height - $bottom-info-height);
+  width: calc(100% - $view-toolbar-width);
+  left: $view-toolbar-width;
+  top: $top-menu-height;
+}
+
+.ReportPaneSplit {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+.ReportPaneLeft {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}

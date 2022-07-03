@@ -1,0 +1,21 @@
+.ScaleSlider {
+  @include layout;
+  @include border($top: true);
+  height: $bottom-info-height;
+  width: 220px;
+  right: 0;
+  bottom: 0;
+
+  .ant-slider {
+    margin: 0;
+  }
+  
+  .ant-row {
+    height: 100%;
+    align-items: center;
+  }
+
+  .FitEntireWindow {
+    cursor: pointer;
+  }
+}

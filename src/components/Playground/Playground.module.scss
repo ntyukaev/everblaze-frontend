@@ -1,7 +1,0 @@
-.Playground {
-  @include layout;
-  height: calc(100% - $top-menu-height - $bottom-info-height);
-  width: calc(100% - $view-toolbar-width);
-  top: $top-menu-height;
-  left: $view-toolbar-width;
-}
