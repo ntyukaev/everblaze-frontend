@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { increment, decrement } from '../../reducers/sheetScale'
 import WMWWrapper from '../WMWWrapper'
-import ReportView from '../ReportView'
+import DataView from '../DataView'
 import 'antd/dist/antd.min.css'
 import './App.scss'
 
@@ -20,7 +20,7 @@ function App () {
   return (
     <WMWWrapper onWindowMouseWheel={handleWindowMouseWheel}>
       <div className="App">
-        <ReportView/>
+        <DataView/>
       </div>
     </WMWWrapper>
   )

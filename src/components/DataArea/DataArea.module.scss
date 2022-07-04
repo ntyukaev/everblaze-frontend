@@ -1,0 +1,8 @@
+.DataArea {
+  @include layout;
+  background-color: $white;
+  height: calc(100%);
+  width: 100%;
+  bottom: 0;
+  overflow: auto;
+}
