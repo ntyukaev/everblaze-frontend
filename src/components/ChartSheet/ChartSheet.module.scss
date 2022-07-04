@@ -1,5 +1,6 @@
 .ChartSheet {
   @include layout;
+  @include border($top: true, $right: true, $bottom: true, $left: true, $style: dotted, $width: 0.2rem);
   background-color: $white;
   height: 100%;
   width: 100%;

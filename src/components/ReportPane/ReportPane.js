@@ -11,7 +11,8 @@ const ReportPane = () => {
             <ChartArea/>
             <TabList/>
           </div>
-          <RightSidebar className={styles.ReportPaneRight}/>
+          <RightSidebar title="Visualizations" className={styles.ReportPaneRight}/>
+          <RightSidebar title="Fields" className={styles.ReportPaneRight}/>
         </div>
       </div>
   )

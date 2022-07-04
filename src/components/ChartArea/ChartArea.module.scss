@@ -1,5 +1,6 @@
 .ChartArea {
   @include layout;
+  background-color: $white;
   height: calc(100% - $tab-list-height);
   width: 100%;
   bottom: $tab-list-height;

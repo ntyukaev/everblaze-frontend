@@ -2,4 +2,32 @@
   @include border($left: true);
   background-color: $primary-color;
   width: $right-sidebar-width;
+
+  .RightSidebarHeading {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+  }
+
+  &.collapsed {
+    width: 40px;
+
+    .RightSidebarHeading {
+      height: 100%;
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+
+      .RightSidebarTitle {
+        writing-mode: vertical-rl;
+      }
+      .RightSidebarCollapseBtn {
+        padding: 0.5rem 0;
+
+        .RightSidebarCollapseBtnIcon {
+          display: block;
+        }
+      }
+    }
+  }
 }

@@ -6,11 +6,11 @@
   right: 0;
   bottom: 0;
 
-  .ant-slider {
+  .AntSlider {
     margin: 0;
   }
   
-  .ant-row {
+  .AntRow {
     height: 100%;
     align-items: center;
   }
@@ -18,4 +18,16 @@
   .FitEntireWindow {
     cursor: pointer;
   }
+}
+
+:global(.ant-slider-step) {
+  background-color: $secondary-color !important;
+}
+
+:global(.ant-slider-handle) {
+  border-color: $secondary-color !important;
+}
+
+:global(.ant-slider-handle:focus) {
+  box-shadow: none !important;
 }

@@ -12,9 +12,9 @@ const ScaleSlider = () => {
   const STEP = useSelector((state) => state.sheetScale.STEP)
   return (
     <div className={styles.ScaleSlider}>
-      <Row className={styles['ant-row']}>
+      <Row className={styles.AntRow}>
         <Col span={10} offset={2}>
-          <Slider className={styles['ant-slider']}
+          <Slider className={styles.AntSlider}
             onChange={(val) => dispatch(setValue(val))} min={MIN_SCALE} max={MAX_SCALE} value={scale} step={STEP}/>
         </Col>
         <Col span={4} offset={2}>
