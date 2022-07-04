@@ -3,19 +3,21 @@ import Playground from '../Playground/Playground'
 import TopMenu from '../TopMenu'
 import ViewToolbar from '../ViewToolbar'
 import RightSidebar from '../RightSidebar'
-import DataArea from '../DataArea'
+import ModelArea from '../ModelArea'
 
-const DataView = () => {
+const ModelView = () => {
+  const sidebar = [<RightSidebar key="Properties" title="Properties"/>,
+                   <RightSidebar key="Fields" title="Fields"/>]
   return (
     <>
       <TopMenu/>
       <ViewToolbar/>
       <BottomInfo/>
-      <Playground sidebar={<RightSidebar title="Fields"/>}>
-        <DataArea/>
+      <Playground sidebar={sidebar}>
+        <ModelArea/>
       </Playground>
     </>
   )
 }
 
-export default DataView
+export default ModelView
