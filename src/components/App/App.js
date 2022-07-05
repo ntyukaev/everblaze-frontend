@@ -1,28 +1,20 @@
-import { useDispatch } from 'react-redux'
-import { increment, decrement } from '../../reducers/sheetScale'
-import WMWWrapper from '../WMWWrapper'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import ReportView from '../ReportView'
 import DataView from '../DataView'
+import ModelView from '../ModelView'
 import 'antd/dist/antd.min.css'
 import './App.scss'
 
 function App () {
-  const dispatch = useDispatch()
-  const handleWindowMouseWheel = (e) => {
-    if (e.ctrlKey) {
-      e.preventDefault()
-      if (e.deltaY > 0) {
-        dispatch(decrement())
-      } else {
-        dispatch(increment())
-      }
-    }
-  }
   return (
-    <WMWWrapper onWindowMouseWheel={handleWindowMouseWheel}>
-      <div className="App">
-        <DataView/>
-      </div>
-    </WMWWrapper>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/report' element={<ReportView/>}/>
+        <Route path='/data' element={<DataView/>}/>
+        <Route path='/model' element={<ModelView/>}/>
+        <Route path='*' element={<Navigate to='/report' />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

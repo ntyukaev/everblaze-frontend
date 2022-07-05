@@ -5,4 +5,12 @@
   left: 0;
   top: $top-menu-height;
   height: calc(100% - $top-menu-height - $bottom-info-height);
+
+  .NavLink {
+    display: block;
+
+    &.Active {
+      @include border($left: true, $color: $orange, $width: 0.2rem);
+    }
+  }
 }

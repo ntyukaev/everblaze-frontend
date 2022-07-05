@@ -1,14 +1,24 @@
+import { NavLink } from 'react-router-dom'
 import { Button } from 'antd'
 import { BarChartOutlined, TableOutlined, ClusterOutlined } from '@ant-design/icons'
 import styles from './ViewToolbar.module.scss'
 
 const ViewToolbar = () => {
+  const viewList = [
+    [BarChartOutlined, '/report'],
+    [TableOutlined, '/data'],
+    [ClusterOutlined, '/model']
+  ]
   return (
     <div className={styles.ViewToolbar}>
       <div className={styles.ViewList}>
-        <Button type='text' icon={<BarChartOutlined/>} block />
-        <Button type='text' icon={<TableOutlined/>} block />
-        <Button type='text' icon={<ClusterOutlined/>} block />
+        {
+          viewList.map(([Icon, url]) => (
+            <NavLink to={url} key={url} className={({ isActive }) => `${styles.NavLink} ${(isActive ? `${styles.Active}` : '')}`}>
+              <Button type='text' icon={<Icon/>} block />
+            </NavLink>
+          ))
+        }
       </div>
     </div>
   )

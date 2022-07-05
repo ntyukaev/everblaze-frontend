@@ -7,7 +7,7 @@ import styles from './RightSidebar.module.scss'
 const { Text } = Typography
 
 const RightSidebar = ({ title, children }) => {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(true)
 
   const handleClick = () => {
     if (collapsed) {
