@@ -11,12 +11,14 @@ const AppRoutes = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path='/report' element={<ReportView />} />
-          <Route path='/data' element={<DataView />} />
-          <Route path='/model' element={<ModelView />} />
+          <Route path='app/:report_id'>
+            <Route path='report' element={<ReportView />} />
+            <Route path='data' element={<DataView />} />
+            <Route path='model' element={<ModelView />} />
+          </Route>
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
-          <Route path='*' element={<Navigate to='/report' />} />
+          <Route path='*' element={<Navigate to='/choose_report' />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

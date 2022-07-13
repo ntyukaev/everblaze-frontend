@@ -1,14 +1,18 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { Button } from 'antd'
 import { BarChartOutlined, TableOutlined, ClusterOutlined } from '@ant-design/icons'
 import styles from './ViewToolbar.module.scss'
 
 const ViewToolbar = () => {
+  const location = useLocation()
+  const { pathname } = location
+  const prefix = pathname.split('/').slice(0, -1).join('/')
   const viewList = [
-    [BarChartOutlined, '/report'],
-    [TableOutlined, '/data'],
-    [ClusterOutlined, '/model']
+    [BarChartOutlined, `${prefix}/report`],
+    [TableOutlined, `${prefix}/data`],
+    [ClusterOutlined, `${prefix}/model`]
   ]
+
   return (
     <div className={styles.ViewToolbar}>
       <div className={styles.ViewList}>
