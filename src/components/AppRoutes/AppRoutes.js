@@ -11,8 +11,11 @@ const AppRoutes = () => {
     <BrowserRouter>
       <AuthProvider>
         <Routes>
-          <Route path='app/:report_id'>
-            <Route path='report' element={<ReportView />} />
+          <Route path='app/:reportId'>
+            <Route path='report'>
+              <Route path=':sheetIndex' element={<ReportView />} />
+              <Route path='' element={<ReportView />} />
+            </Route>
             <Route path='data' element={<DataView />} />
             <Route path='model' element={<ModelView />} />
           </Route>

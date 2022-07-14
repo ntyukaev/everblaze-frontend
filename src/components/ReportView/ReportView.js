@@ -9,6 +9,7 @@ import ReportArea from '../ReportArea'
 import TabList from '../TabList'
 import RightSidebar from '../RightSidebar'
 import WMWWrapper from '../WMWWrapper'
+import SheetList from '../SheetList'
 
 const ReportView = () => {
   const sidebar = [<RightSidebar key='Visualizations' title="Visualizations"/>,
@@ -35,7 +36,9 @@ const ReportView = () => {
       </BottomInfo>
       <Playground sidebar={sidebar}>
         <ReportArea/>
-        <TabList/>
+        <TabList>
+          <SheetList/>
+        </TabList>
       </Playground>
     </WMWWrapper>
   )

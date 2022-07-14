@@ -1,9 +1,14 @@
+import PropTypes from 'prop-types'
 import styles from './TabList.module.scss'
 
-const TabList = () => {
+const TabList = ({ children }) => {
   return (
-    <div className={styles.TabList}></div>
+    <div className={styles.TabList}>{ children }</div>
   )
+}
+
+TabList.propTypes = {
+  children: PropTypes.any
 }
 
 export default TabList
