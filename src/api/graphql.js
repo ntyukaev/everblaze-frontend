@@ -20,7 +20,7 @@ export const useSheets = (reportId) => {
   const GET_SHEETS = gql`
     query SheetIndexAndName($reportId: Int!) {
       report(id: $reportId) {
-        sheet {
+        sheets {
           index,
           name
         }
@@ -28,5 +28,32 @@ export const useSheets = (reportId) => {
     }
   `
   const { loading, error, data } = useQuery(GET_SHEETS, { variables: { reportId } })
+  return { loading, error, data }
+}
+
+export const useCharts = (reportId, sheetIndex) => {
+  const GET_CHARTS = gql`
+    query Charts($reportId: Int!, $sheetIndex: Int!) {
+      sheet(report_id: $reportId, index: $sheetIndex) {
+        charts {
+          x,
+          y,
+          type,
+          fields {
+            id,
+            type,
+            column {
+              id,
+              name,
+              cells {
+                value
+              }
+            }
+          }
+        }
+      }
+    }
+  `
+  const { loading, error, data } = useQuery(GET_CHARTS, { variables: { reportId, sheetIndex } })
   return { loading, error, data }
 }

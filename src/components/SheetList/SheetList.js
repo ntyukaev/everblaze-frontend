@@ -13,7 +13,7 @@ const SheetList = () => {
 
   useEffect(() => {
     if (!loading) {
-      setSheets([...data.report.sheet].sort((el1, el2) => el1.index > el2.index ? 1 : -1))
+      setSheets([...data.report.sheets].sort((el1, el2) => el1.index > el2.index ? 1 : -1))
     }
   }, [loading])
 
