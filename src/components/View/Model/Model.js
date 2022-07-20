@@ -1,7 +1,7 @@
-import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../Layout'
-import ModelArea from '../ModelArea'
+import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../../Layout'
+import ModelArea from './ModelArea'
 
-const ModelView = () => {
+const Model = () => {
   const sidebar = [<RightSidebar key="Properties" title="Properties"/>,
                    <RightSidebar key="Fields" title="Fields"/>]
   return (
@@ -16,4 +16,4 @@ const ModelView = () => {
   )
 }
 
-export default ModelView
+export default Model
