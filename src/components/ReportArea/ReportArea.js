@@ -1,12 +1,19 @@
+import PropTypes from 'prop-types'
 import ChartSheet from '../ChartSheet'
+import ScaleOnCtrlWheel from '../ScaleOnCtrlWheel'
 import styles from './ReportArea.module.scss'
 
-const ReportArea = () => {
+const ReportArea = ({ selectedSheet }) => {
+  console.log(selectedSheet)
   return (
     <div className={styles.ReportArea}>
-      <ChartSheet/>
+      <ChartSheet selectedSheet={selectedSheet}/>
     </div>
   )
 }
 
-export default ReportArea
+ReportArea.propTypes = {
+  selectedSheet: PropTypes.number
+}
+
+export default ScaleOnCtrlWheel(ReportArea)

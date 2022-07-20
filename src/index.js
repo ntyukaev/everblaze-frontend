@@ -1,21 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
-import { GRAPHQL_ENDPOINT } from './api/graphql'
+import { ApolloProvider } from '@apollo/client'
+import apollo from './apollo'
 import App from './components/App'
 import store from './store'
 import reportWebVitals from './reportWebVitals'
 
-const apolloClient = new ApolloClient({
-  uri: GRAPHQL_ENDPOINT,
-  cache: new InMemoryCache()
-})
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <ApolloProvider client={apolloClient}>
+    <ApolloProvider client={apollo}>
       <Provider store={store}>
         <App />
       </Provider>

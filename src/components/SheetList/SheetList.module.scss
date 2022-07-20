@@ -1,7 +1,3 @@
-.SheetList {
-
-}
-
 .SheetActive {
   @include border($bottom: true, $color: $orange, $width: 0.2rem);
 }

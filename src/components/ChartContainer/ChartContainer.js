@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux'
 import { Rnd } from 'react-rnd'
 import PropTypes from 'prop-types'
 import ChartBuilder from '../ChartBuilder/ChartBuilder'
+import { useFields } from '../../hooks'
 import styles from './ChartContainer.module.scss'
 
 function withDraggableNResizable (Component) {
@@ -32,60 +33,91 @@ function withDraggableNResizable (Component) {
   return EnchancedComponent
 }
 
-const ChartContainer = (props) => {
-  const fields = [...props.fields]
-  if (!fields) {
+const ChartContainer = ({ type, id }) => {
+  const { error, loading, data } = useFields(+id)
+
+  if (error) {
     return (
-      <div className={styles.ChartContainer}>No Fields</div>
+      <div>An error occured</div>
     )
   }
 
-  // make sure all columns are the same length
-  const fieldsSameLength = () => {
+  if (loading) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+
+  if (!(data.fields.length > 0)) {
+    return (
+      <div>No Fields Provided</div>
+    )
+  }
+
+  const fieldsSameLength = (fields) => {
     const fieldLengths = fields.map((field) => field.column.cells.length)
-    return fieldLengths.every((l) => fieldLengths[0] === l)
+    return fieldLengths.every((f) => fieldLengths[0] === f)
   }
 
-  if (!fieldsSameLength) {
+  if (!fieldsSameLength(data.fields)) {
     return (
-      <div>Error</div>
+      <div>Fields Are Not Same Length.</div>
     )
   }
 
-  const getData = () => {
+  const getColumnNames = (fields) => {
+    const count = {}
+    return fields.map((field) => {
+      let name = field.column.name
+      if (name in count) {
+        name = `${name} (${count[name]})`
+        count[name] += 1
+      } else {
+        count[name] = 1
+      }
+      return name
+    })
+  }
+
+  const columnNames = getColumnNames(data.fields)
+
+  const getInputData = (fields) => {
     const data = Array.from({ length: fields[0].column.cells.length }, () => { return {} })
     return fields.reduce((acc, cur, fieldIndex) => {
       cur.column.cells.forEach((cell, cellIndex) => {
-        const columnName = cur.column.name in acc[cellIndex] ? `${cur.column.name} (${fieldIndex})` : cur.column.name
+        const columnName = columnNames[fieldIndex]
         acc[cellIndex][columnName] = cell.value
       })
       return acc
     }, data)
   }
 
-  const getFieldMapping = () => {
+  const inputData = getInputData(data.fields)
+  console.log(inputData)
+
+  const getFieldMapping = (fields) => {
     return fields.reduce((acc, cur, fieldIndex) => {
       const { type } = cur
       if (!acc[type]) {
         acc[type] = []
       }
-      const columnName = cur.column.name in acc[type] ? `${cur.column.name} (${fieldIndex})` : cur.column.name
+      const columnName = columnNames[fieldIndex]
       acc[type].push(columnName)
       return acc
     }, {})
   }
 
-  const data = getData()
-  const fieldMapping = getFieldMapping()
+  const fieldMapping = getFieldMapping(data.fields)
+  console.log(fieldMapping)
 
   return (
-    <ChartBuilder type={props.type} data={data} fields={fieldMapping}/>
+    <ChartBuilder type={type} data={inputData} fields={fieldMapping}/>
   )
 }
 
 ChartContainer.propTypes = {
-  type: PropTypes.string,
-  fields: PropTypes.array
+  id: PropTypes.number,
+  type: PropTypes.string
 }
 
 export default withDraggableNResizable(ChartContainer)

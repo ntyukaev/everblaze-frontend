@@ -1,34 +1,19 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import { Button } from 'antd'
-import { useSheets } from '../../api/graphql'
 import styles from './SheetList.module.scss'
 
-const SheetList = () => {
-  const selectedSheet = useSelector((state) => state.selectedSheet.selectedSheet)
-  const [sheets, setSheets] = useState([])
-  const { reportId } = useParams()
-  const { loading, error, data } = useSheets(+reportId)
-
-  useEffect(() => {
-    if (!loading) {
-      setSheets([...data.report.sheets].sort((el1, el2) => el1.index > el2.index ? 1 : -1))
-    }
-  }, [loading])
-
-  if (loading || error) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-
+const SheetList = ({ sheets, selectedSheet }) => {
   return (
     <div className={styles.SheetList}>
       {sheets.map((sheet) => <Button type='text' key={sheet.index}
-        className={selectedSheet === sheet.index && styles.SheetActive}>{sheet.name}</Button>)}
+        className={selectedSheet === sheet.id && styles.SheetActive}>{sheet.name}</Button>)}
     </div>
   )
+}
+
+SheetList.propTypes = {
+  sheets: PropTypes.array,
+  selectedSheet: PropTypes.number
 }
 
 export default SheetList

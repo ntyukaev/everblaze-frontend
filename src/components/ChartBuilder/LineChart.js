@@ -13,7 +13,7 @@ const LineChart = ({ data, fields, generateColor }) => {
       <LC data={data}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey={fields.X[0]} />
-        <YAxis />
+        <YAxis dataKey={fields.Y[0]}/>
         <Tooltip />
         <Legend />
         {fields.X.map((field) => (
