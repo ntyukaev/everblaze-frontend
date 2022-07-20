@@ -1,4 +1,4 @@
-import RightSidebar from '../RightSidebar'
+import { RightSidebar } from '../Layout'
 
 const ReportSidebar = () => {
   return (

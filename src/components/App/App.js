@@ -3,8 +3,7 @@ import { AuthProvider } from '../../contexts/useAuth'
 import ReportView from '../ReportView'
 import DataView from '../DataView'
 import ModelView from '../ModelView'
-import Register from '../Register'
-import Login from '../Login'
+import { Login, Register } from '../View'
 import 'antd/dist/antd.min.css'
 import './App.scss'
 
@@ -18,8 +17,8 @@ const App = () => {
             <Route path='data' element={<DataView />} />
             <Route path='model' element={<ModelView />} />
           </Route>
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+          <Route path='login' element={<Login />} />
           <Route path='*' element={<Navigate to='/choose_report' />} />
         </Routes>
       </AuthProvider>
