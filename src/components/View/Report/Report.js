@@ -1,14 +1,14 @@
 import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Spin } from 'antd'
-import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
-import ReportLoader from './ReportLoader'
-import ScaleSlider from '../../ScaleSlider'
-import ReportArea from './ReportArea'
-import SheetList from './SheetList'
 import { useSheets } from '../../../hooks'
 import { selectedSheetsVar } from '../../../apollo'
 import { writeSheet } from '../../../operations'
+import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
+import ReportLoader from './ReportLoader'
+import ScaleSlider from '../../ScaleSlider'
+import Sheet from './Sheet'
+import SheetList from './SheetList'
 import styles from './Report.module.scss'
 
 const Report = ({ id, name, selectedSheet }) => {
@@ -46,7 +46,7 @@ const Report = ({ id, name, selectedSheet }) => {
       <Playground>
         <Playground.Body>
           <Playground.Canvas>
-            <ReportArea selectedSheet={selectedSheet} />
+            <Sheet selectedSheet={selectedSheet} />
             <TabList>
               <SheetList selectedSheet={selectedSheet} sheets={data.sheets} />
             </TabList>

@@ -1,4 +1,13 @@
-.ChartSheet {
+.Sheet {
+  @include layout;
+  background-color: $white;
+  height: calc(100% - $tab-list-height);
+  width: 100%;
+  bottom: $tab-list-height;
+  overflow: auto;
+}
+
+.ScalableSheetContainer {
   @include layout;
   @include border($top: true, $right: true, $bottom: true, $left: true, $style: dotted, $width: 0.2rem);
   background-color: $white;
