@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import { useCharts } from '../../../../hooks'
-import ChartContainer from '../ChartContainer'
+import Chart from '../Chart'
 import styles from './ChartList.module.scss'
 
 const ChartList = ({ selectedSheet }) => {
@@ -14,7 +14,7 @@ const ChartList = ({ selectedSheet }) => {
   return (
     <div className={styles.ChartList}>
       {data.charts.map((chart) => (
-        <ChartContainer key={chart.id} {...chart} />
+        <Chart key={chart.id} {...chart} />
       ))}
     </div>
   )

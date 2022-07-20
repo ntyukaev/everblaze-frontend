@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux'
 import { Rnd } from 'react-rnd'
 import PropTypes from 'prop-types'
-import ChartBuilder from '../ChartBuilder/ChartBuilder'
+import ChartBuilder from './ChartBuilder'
 import { useFields } from '../../../../hooks'
-import styles from './ChartContainer.module.scss'
+import styles from './Chart.module.scss'
 
 function withDraggableNResizable (Component) {
   function EnchancedComponent ({ x, y, ...props }) {
     const scale = useSelector((state) => state.sheetScale.scale)
     return (
       <Rnd
-        className={styles.ChartContainer}
+        className={styles.Chart}
         bounds='parent'
         scale={scale}
         default={{
@@ -33,7 +33,7 @@ function withDraggableNResizable (Component) {
   return EnchancedComponent
 }
 
-const ChartContainer = ({ type, id }) => {
+const Chart = ({ type, id }) => {
   const { error, loading, data } = useFields(+id)
 
   if (error) {
@@ -93,7 +93,6 @@ const ChartContainer = ({ type, id }) => {
   }
 
   const inputData = getInputData(data.fields)
-  console.log(inputData)
 
   const getFieldMapping = (fields) => {
     return fields.reduce((acc, cur, fieldIndex) => {
@@ -108,16 +107,15 @@ const ChartContainer = ({ type, id }) => {
   }
 
   const fieldMapping = getFieldMapping(data.fields)
-  console.log(fieldMapping)
 
   return (
     <ChartBuilder type={type} data={inputData} fields={fieldMapping}/>
   )
 }
 
-ChartContainer.propTypes = {
+Chart.propTypes = {
   id: PropTypes.number,
   type: PropTypes.string
 }
 
-export default withDraggableNResizable(ChartContainer)
+export default withDraggableNResizable(Chart)
