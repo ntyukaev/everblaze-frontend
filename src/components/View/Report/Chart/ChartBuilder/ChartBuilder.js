@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types'
-import chartEnum from './chartEnum'
+import chartTypes from './chartTypes'
 
 const ChartBuilder = ({ type, data, fields }) => {
-  const ChartComponent = chartEnum[type]
+  const ChartComponent = chartTypes[type]
   return (
     <ChartComponent data={data} fields={fields}/>
   )

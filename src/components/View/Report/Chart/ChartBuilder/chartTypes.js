@@ -1,7 +1,7 @@
 import LineChart from './LineChart'
 
-const chartEnum = {
+const chartTypes = {
   LINE_CHART: LineChart
 }
 
-export default chartEnum
+export default chartTypes
