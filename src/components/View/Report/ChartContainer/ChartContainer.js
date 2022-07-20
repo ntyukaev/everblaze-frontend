@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux'
 import { Rnd } from 'react-rnd'
 import PropTypes from 'prop-types'
 import ChartBuilder from '../ChartBuilder/ChartBuilder'
-import { useFields } from '../../hooks'
+import { useFields } from '../../../../hooks'
 import styles from './ChartContainer.module.scss'
 
 function withDraggableNResizable (Component) {

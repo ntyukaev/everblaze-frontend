@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { Spin } from 'antd'
-import { useReport } from '../../hooks'
+import { useReport } from '../../../../hooks'
 import styles from './ReportLoader.module.scss'
 
 const ReportLoader = (Component) => function ReportLoader () {
