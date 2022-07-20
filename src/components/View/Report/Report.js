@@ -5,7 +5,7 @@ import { useSheets } from '../../../hooks'
 import { selectedSheetsVar } from '../../../apollo'
 import { writeSheet } from '../../../operations'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
-import ReportLoader from './ReportLoader'
+import DataLoader from '../../DataLoader'
 import ScaleSlider from '../../ScaleSlider'
 import Sheet from './Sheet'
 import SheetList from './SheetList'
@@ -72,4 +72,4 @@ Report.propTypes = {
   selectedSheet: PropTypes.number
 }
 
-export default ReportLoader(Report)
+export default DataLoader(Report)

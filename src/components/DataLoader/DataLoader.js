@@ -1,9 +1,9 @@
 import { useParams } from 'react-router-dom'
 import { Spin } from 'antd'
-import { useReport } from '../../../../hooks'
-import styles from './ReportLoader.module.scss'
+import { useReport } from '../../hooks'
+import styles from './DataLoader.module.scss'
 
-const ReportLoader = (Component) => function ReportLoader () {
+const DataLoader = (Component) => function ReportLoader () {
   const { reportId } = useParams()
   const { error, loading, data } = useReport(+reportId)
   if (error) {
@@ -13,7 +13,7 @@ const ReportLoader = (Component) => function ReportLoader () {
   }
   if (loading) {
     return (
-      <div className={styles.ReportLoaderSpinner}>
+      <div className={styles.DataLoaderSpinner}>
         <Spin />
       </div>
     )
@@ -23,4 +23,4 @@ const ReportLoader = (Component) => function ReportLoader () {
   )
 }
 
-export default ReportLoader
+export default DataLoader
