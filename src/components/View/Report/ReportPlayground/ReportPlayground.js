@@ -40,11 +40,18 @@ const ReportPlayground = ({ reportId, selectedSheet }) => {
     )
   }
   return (
-    <Playground sidebar={<ReportSidebar />}>
-      <ReportArea selectedSheet={selectedSheet} />
-      <TabList>
-        <SheetList selectedSheet={selectedSheet} sheets={data.sheets} />
-      </TabList>
+    <Playground>
+      <Playground.Body>
+        <Playground.Canvas>
+          <ReportArea selectedSheet={selectedSheet} />
+          <TabList>
+            <SheetList selectedSheet={selectedSheet} sheets={data.sheets} />
+          </TabList>
+        </Playground.Canvas>
+        <Playground.Sidebars>
+          <ReportSidebar />
+        </Playground.Sidebars>
+      </Playground.Body>
     </Playground>
   )
 }

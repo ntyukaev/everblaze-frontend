@@ -6,15 +6,19 @@
   top: $top-menu-height;
 }
 
-.PlaygroundSplit {
+.PlaygroundBody {
   width: 100%;
   height: 100%;
   display: flex;
   position: relative;
 }
 
-.PlaygroundLeft {
+.PlaygroundCanvas {
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.PlaygroundSidebars {
+  display: flex;
 }
