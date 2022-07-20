@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types'
 import ReportLoader from '../ReportLoader/ReportLoader'
-import TopMenu from '../TopMenu'
-import ViewToolbar from '../ViewToolbar'
-import BottomInfo from '../BottomInfo'
+import { TopMenu, ViewToolbar, BottomInfo } from '../Layout'
 import ScaleSlider from '../ScaleSlider/ScaleSlider'
 import ReportPlayground from '../ReportPlayground'
 

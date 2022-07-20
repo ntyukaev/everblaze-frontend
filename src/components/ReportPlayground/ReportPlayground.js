@@ -5,10 +5,9 @@ import { selectedSheetsVar } from '../../apollo'
 import { writeSheet } from '../../operations'
 import { useSheets } from '../../hooks'
 import ReportSidebar from '../ReportSidebar'
-import Playground from '../Playground/Playground'
+import { Playground, TabList } from '../Layout'
 import SheetList from '../SheetList'
 import ReportArea from '../ReportArea'
-import TabList from '../TabList'
 import styles from './ReportPlayground.module.scss'
 
 const ReportPlayground = ({ reportId, selectedSheet }) => {

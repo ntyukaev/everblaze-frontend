@@ -1,8 +1,4 @@
-import BottomInfo from '../BottomInfo'
-import Playground from '../Playground/Playground'
-import TopMenu from '../TopMenu'
-import ViewToolbar from '../ViewToolbar'
-import RightSidebar from '../RightSidebar'
+import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../Layout'
 import ModelArea from '../ModelArea'
 
 const ModelView = () => {
