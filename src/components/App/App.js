@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from '../../contexts/useAuth'
 import ReportView from '../ReportView'
-import DataView from '../DataView'
-import { Login, Register, Model } from '../View'
+import { Login, Register, Model, Data } from '../View'
 import 'antd/dist/antd.min.css'
 import './App.scss'
 
@@ -13,7 +12,7 @@ const App = () => {
         <Routes>
           <Route path='app/:reportId'>
             <Route path='report' element={<ReportView />} />
-            <Route path='data' element={<DataView />} />
+            <Route path='data' element={<Data />} />
             <Route path='model' element={<Model />} />
           </Route>
           <Route path='register' element={<Register />} />

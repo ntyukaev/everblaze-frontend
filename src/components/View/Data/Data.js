@@ -1,7 +1,7 @@
-import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../Layout'
-import DataArea from '../DataArea'
+import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../../Layout'
+import DataArea from './DataArea'
 
-const DataView = () => {
+const Data = () => {
   return (
     <>
       <TopMenu/>
@@ -14,4 +14,4 @@ const DataView = () => {
   )
 }
 
-export default DataView
+export default Data
