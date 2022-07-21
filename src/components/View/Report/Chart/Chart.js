@@ -1,39 +1,12 @@
 import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
 import { Rnd } from 'react-rnd'
+import { fieldsSameLength, getInputData, getColumnNames, getFieldMapping } from './utils'
 import { GET_FIELDS } from '../../../../operations/queries/getFields'
 import ChartBuilder from './ChartBuilder'
 import styles from './Chart.module.scss'
 
-function withDraggableNResizable (Component) {
-  function EnchancedComponent ({ x, y, scale, ...props }) {
-    return (
-      <Rnd
-        className={styles.Chart}
-        bounds='parent'
-        scale={scale}
-        default={{
-          x,
-          y,
-          width: '30%',
-          height: '30%'
-        }}
-      >
-        <Component {...props} />
-      </Rnd>
-    )
-  }
-
-  EnchancedComponent.propTypes = {
-    x: PropTypes.number,
-    y: PropTypes.number,
-    scale: PropTypes.number
-  }
-
-  return EnchancedComponent
-}
-
-const Chart = ({ type, id }) => {
+const Chart = ({ x, y, scale, type, id }) => {
   const chartId = id
   const { error, loading, data } = useQuery(GET_FIELDS, { variables: { chartId } })
 
@@ -42,81 +15,49 @@ const Chart = ({ type, id }) => {
       <div>An error occured</div>
     )
   }
-
   if (loading) {
     return (
       <div>Loading...</div>
     )
   }
-
   if (!(data.fields.length > 0)) {
     return (
       <div>No Fields Provided</div>
     )
   }
-
-  const fieldsSameLength = (fields) => {
-    const fieldLengths = fields.map((field) => field.column.cells.length)
-    return fieldLengths.every((f) => fieldLengths[0] === f)
-  }
-
   if (!fieldsSameLength(data.fields)) {
     return (
       <div>Fields Are Not Same Length.</div>
     )
   }
 
-  const getColumnNames = (fields) => {
-    const count = {}
-    return fields.map((field) => {
-      let name = field.column.name
-      if (name in count) {
-        name = `${name} (${count[name]})`
-        count[name] += 1
-      } else {
-        count[name] = 1
-      }
-      return name
-    })
-  }
-
   const columnNames = getColumnNames(data.fields)
-
-  const getInputData = (fields) => {
-    const data = Array.from({ length: fields[0].column.cells.length }, () => { return {} })
-    return fields.reduce((acc, cur, fieldIndex) => {
-      cur.column.cells.forEach((cell, cellIndex) => {
-        const columnName = columnNames[fieldIndex]
-        acc[cellIndex][columnName] = cell.value
-      })
-      return acc
-    }, data)
-  }
-
-  const inputData = getInputData(data.fields)
-
-  const getFieldMapping = (fields) => {
-    return fields.reduce((acc, cur, fieldIndex) => {
-      const { type } = cur
-      if (!acc[type]) {
-        acc[type] = []
-      }
-      const columnName = columnNames[fieldIndex]
-      acc[type].push(columnName)
-      return acc
-    }, {})
-  }
-
-  const fieldMapping = getFieldMapping(data.fields)
+  const inputData = getInputData(data.fields, columnNames)
+  const fieldMapping = getFieldMapping(data.fields, columnNames)
 
   return (
-    <ChartBuilder type={type} data={inputData} fields={fieldMapping}/>
+    <Rnd
+      className={styles.Chart}
+      bounds='parent'
+      scale={scale}
+      default={{
+        x,
+        y,
+        width: '30%',
+        height: '30%'
+      }}
+    >
+      <ChartBuilder type={type} data={inputData} fields={fieldMapping} />
+    </Rnd>
   )
 }
 
 Chart.propTypes = {
   id: PropTypes.number,
-  type: PropTypes.string
+  type: PropTypes.string,
+  x: PropTypes.number,
+  y: PropTypes.number,
+  scale: PropTypes.number
 }
 
-export default withDraggableNResizable(Chart)
+export default Chart

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import { AuthProvider } from '../../contexts/useAuth'
+import { AuthProvider } from '../../context/useAuth'
 import { Login, Register, Model, Data, Report } from '../View'
 import 'antd/dist/antd.min.css'
 import './App.scss'
