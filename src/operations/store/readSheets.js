@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import apollo from '../apollo'
+import apollo from '../../apollo'
 
 const READ_SHEETS = gql`
   query writeSheet($id: Int!) {

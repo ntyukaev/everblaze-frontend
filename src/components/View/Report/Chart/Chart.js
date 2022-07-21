@@ -1,7 +1,8 @@
-import { Rnd } from 'react-rnd'
+import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
+import { Rnd } from 'react-rnd'
+import { GET_FIELDS } from '../../../../operations/queries/getFields'
 import ChartBuilder from './ChartBuilder'
-import { useFields } from '../../../../hooks'
 import styles from './Chart.module.scss'
 
 function withDraggableNResizable (Component) {
@@ -33,7 +34,8 @@ function withDraggableNResizable (Component) {
 }
 
 const Chart = ({ type, id }) => {
-  const { error, loading, data } = useFields(+id)
+  const chartId = id
+  const { error, loading, data } = useQuery(GET_FIELDS, { variables: { chartId } })
 
   if (error) {
     return (

@@ -1,21 +1,11 @@
-import { gql } from '@apollo/client'
-import apollo from '../apollo'
+import apollo from '../../apollo'
 import readSheets from './readSheets'
-
-const WRITE_SHEET = gql`
-  query writeSheet($id: Int!) {
-    sheets(report_id: $id) {
-      id
-      index
-      name
-    }
-  }
-`
+import { GET_SHEETS } from '../queries/getSheets'
 
 const writeSheet = (data, variables) => {
   const { sheets } = readSheets(variables)
   apollo.writeQuery({
-    query: WRITE_SHEET,
+    query: GET_SHEETS,
     data: {
       sheets: [
         ...sheets,

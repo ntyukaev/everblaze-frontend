@@ -1,11 +1,13 @@
+import { useQuery } from '@apollo/client'
 import { useParams } from 'react-router-dom'
 import { Spin } from 'antd'
-import { useReport } from '../../hooks'
+import { GET_REPORT } from '../../operations/queries/getReport'
 import styles from './DataLoader.module.scss'
 
 const DataLoader = (Component) => function ReportLoader () {
-  const { reportId } = useParams()
-  const { error, loading, data } = useReport(+reportId)
+  const params = useParams()
+  const reportId = +params.reportId
+  const { error, loading, data } = useQuery(GET_REPORT, { variables: { reportId } })
   if (error) {
     return (
       <div>An Error Occured</div>

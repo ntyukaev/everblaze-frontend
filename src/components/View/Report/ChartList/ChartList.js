@@ -1,10 +1,18 @@
+import { useQuery } from '@apollo/client'
 import PropTypes from 'prop-types'
-import { useCharts } from '../../../../hooks'
+import { GET_CHARTS } from '../../../../operations/queries/getCharts'
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
 
 const ChartList = ({ selectedSheet, scale }) => {
-  const { loading, data } = useCharts(+selectedSheet)
+  const { error, loading, data } = useQuery(GET_CHARTS, { variables: { sheetId: selectedSheet } })
+
+  if (error) {
+    return (
+      <div>An error occured</div>
+    )
+  }
+
   if (loading) {
     return (
       <div className={styles.ChartList}>Loading</div>
