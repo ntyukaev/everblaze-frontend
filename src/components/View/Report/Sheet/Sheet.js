@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import ScaleOnCtrlWheel from '../../../ScaleOnCtrlWheel'
 import ChartList from '../ChartList'
 import styles from './Sheet.module.scss'
 
@@ -11,19 +9,19 @@ const ScalableSheetContainer = styled.div.attrs(({ scale }) => ({
   }
 }))``
 
-const Sheet = ({ selectedSheet }) => {
-  const scale = useSelector((state) => state.sheetScale.scale)
+const Sheet = ({ selectedSheet, scale }) => {
   return (
     <div className={styles.Sheet}>
       <ScalableSheetContainer scale={scale} className={styles.ScalableSheetContainer}>
-        <ChartList selectedSheet={selectedSheet} />
+        <ChartList scale={scale} selectedSheet={selectedSheet} />
       </ScalableSheetContainer>
     </div>
   )
 }
 
 Sheet.propTypes = {
-  selectedSheet: PropTypes.number
+  selectedSheet: PropTypes.number,
+  scale: PropTypes.number
 }
 
-export default ScaleOnCtrlWheel(Sheet)
+export default Sheet

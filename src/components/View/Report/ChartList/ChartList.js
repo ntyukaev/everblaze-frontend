@@ -3,7 +3,7 @@ import { useCharts } from '../../../../hooks'
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
 
-const ChartList = ({ selectedSheet }) => {
+const ChartList = ({ selectedSheet, scale }) => {
   const { loading, data } = useCharts(+selectedSheet)
   if (loading) {
     return (
@@ -14,14 +14,15 @@ const ChartList = ({ selectedSheet }) => {
   return (
     <div className={styles.ChartList}>
       {data.charts.map((chart) => (
-        <Chart key={chart.id} {...chart} />
+        <Chart scale={scale} key={chart.id} {...chart} />
       ))}
     </div>
   )
 }
 
 ChartList.propTypes = {
-  selectedSheet: PropTypes.number
+  selectedSheet: PropTypes.number,
+  scale: PropTypes.number
 }
 
 export default ChartList

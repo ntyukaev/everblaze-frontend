@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 import { Rnd } from 'react-rnd'
 import PropTypes from 'prop-types'
 import ChartBuilder from './ChartBuilder'
@@ -6,8 +5,7 @@ import { useFields } from '../../../../hooks'
 import styles from './Chart.module.scss'
 
 function withDraggableNResizable (Component) {
-  function EnchancedComponent ({ x, y, ...props }) {
-    const scale = useSelector((state) => state.sheetScale.scale)
+  function EnchancedComponent ({ x, y, scale, ...props }) {
     return (
       <Rnd
         className={styles.Chart}
@@ -27,7 +25,8 @@ function withDraggableNResizable (Component) {
 
   EnchancedComponent.propTypes = {
     x: PropTypes.number,
-    y: PropTypes.number
+    y: PropTypes.number,
+    scale: PropTypes.number
   }
 
   return EnchancedComponent

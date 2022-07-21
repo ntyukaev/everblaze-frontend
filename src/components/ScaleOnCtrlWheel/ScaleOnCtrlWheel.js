@@ -1,18 +1,21 @@
-import { useDispatch } from 'react-redux'
-import { increment, decrement } from '../../reducers/sheetScale'
-import { useEffect } from 'react'
+import { useEffect, useReducer } from 'react'
+import scaleReducer, { initialState } from './scaleReducer'
 
 const ScaleOnCtrlWheel = (Component) => function ScaleOnCtrlWheel (props) {
-  const dispatch = useDispatch()
+  const [scaleConfig, dispatch] = useReducer(scaleReducer, initialState)
   const handleMouseWheel = (e) => {
     if (e.ctrlKey) {
       e.preventDefault()
       if (e.deltaY > 0) {
-        dispatch(decrement())
+        dispatch({ type: 'decrement' })
       } else {
-        dispatch(increment())
+        dispatch({ type: 'increment' })
       }
     }
+  }
+
+  const setScale = (val) => {
+    dispatch({ type: 'set', payload: val })
   }
 
   /* Component Did Mount */
@@ -28,7 +31,7 @@ const ScaleOnCtrlWheel = (Component) => function ScaleOnCtrlWheel (props) {
   }, [])
 
   return (
-    <Component {...props} />
+    <Component scaleConfig={scaleConfig} setScale={setScale} {...props} />
   )
 }
 

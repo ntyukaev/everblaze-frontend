@@ -5,13 +5,14 @@ import { useSheets } from '../../../hooks'
 import { selectedSheetsVar } from '../../../apollo'
 import { writeSheet } from '../../../operations'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
+import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
 import DataLoader from '../../DataLoader'
 import ScaleSlider from '../../ScaleSlider'
 import Sheet from './Sheet'
 import SheetList from './SheetList'
 import styles from './Report.module.scss'
 
-const Report = ({ id, name, selectedSheet }) => {
+const Report = ({ id, name, selectedSheet, scaleConfig, setScale }) => {
   const { error, loading, data } = useSheets(+id)
   useEffect(() => {
     if (!selectedSheet) {
@@ -46,7 +47,7 @@ const Report = ({ id, name, selectedSheet }) => {
       <Playground>
         <Playground.Body>
           <Playground.Canvas>
-            <Sheet selectedSheet={selectedSheet} />
+            <Sheet scale={scaleConfig.scale} selectedSheet={selectedSheet} />
             <TabList>
               <SheetList selectedSheet={selectedSheet} sheets={data.sheets} />
             </TabList>
@@ -60,7 +61,7 @@ const Report = ({ id, name, selectedSheet }) => {
       <TopMenu reportName={name} />
       <ViewToolbar />
       <BottomInfo>
-        <ScaleSlider />
+        <ScaleSlider { ...scaleConfig } setScale={setScale} />
       </BottomInfo>
     </>
   )
@@ -69,7 +70,9 @@ const Report = ({ id, name, selectedSheet }) => {
 Report.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
-  selectedSheet: PropTypes.number
+  selectedSheet: PropTypes.number,
+  scaleConfig: PropTypes.object,
+  setScale: PropTypes.func
 }
 
-export default DataLoader(Report)
+export default DataLoader(ScaleOnCtrlWheel(Report))
