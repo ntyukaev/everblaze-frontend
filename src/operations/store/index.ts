@@ -1,7 +1,11 @@
+import createSheet from './createSheet'
 import readSheets from './readSheets'
-import writeSheet from './writeSheet'
+import createChart from './createChart'
+import readCharts from './readCharts'
 
 export {
+  createSheet,
   readSheets,
-  writeSheet
+  createChart,
+  readCharts
 }

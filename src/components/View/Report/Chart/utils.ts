@@ -1,7 +1,6 @@
-import { CellProps } from '../../../../types'
-import { Field } from './../../../../operations/queries/getFields'
+import { CellProps, IField } from '../../../../types'
 
-export const getColumnNames = (fields: Field[]): string[] => {
+export const getColumnNames = (fields: IField[]): string[] => {
   const count: { [name: string]: number } = {}
   return fields.map((field) => {
     let name = field.column.name
@@ -15,17 +14,16 @@ export const getColumnNames = (fields: Field[]): string[] => {
   })
 }
 
-export const fieldsSameLength = (fields: Field[]): boolean => {
+export const fieldsSameLength = (fields: IField[]): boolean => {
   const fieldLengths = fields.map((field) => field.column.cells.length)
   return fieldLengths.every((f) => fieldLengths[0] === f)
 }
 
 export type IInputData = Array<Record<string, any>>
 
-// {[cellIndex: number]: Record<string, any>}
-export const getInputData = (fields: Field[], columnNames: string[]): IInputData => {
+export const getInputData = (fields: IField[], columnNames: string[]): IInputData => {
   const data: Record<string, any>[] = Array.from({ length: fields[0].column.cells.length }, () => { return {} })
-  return fields.reduce((acc: IInputData, cur: Field, fieldIndex:number) => {
+  return fields.reduce((acc: IInputData, cur: IField, fieldIndex:number) => {
     cur.column.cells.forEach((cell: CellProps, cellIndex: number) => {
       const columnName = columnNames[fieldIndex]
       acc[cellIndex][columnName] = cell.value
@@ -36,7 +34,7 @@ export const getInputData = (fields: Field[], columnNames: string[]): IInputData
 
 export type FieldMapping = {[type:string]: string[]}
 
-export const getFieldMapping = (fields: Field[], columnNames: string[]): FieldMapping => {
+export const getFieldMapping = (fields: IField[], columnNames: string[]): FieldMapping => {
   return fields.reduce((acc:FieldMapping, cur, fieldIndex) => {
     const { type } = cur
     if (!acc[type]) {

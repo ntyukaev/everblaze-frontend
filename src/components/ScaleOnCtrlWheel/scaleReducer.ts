@@ -1,11 +1,12 @@
-export type ScaleReducerInitialState = {
-  scale: number,
+import { Scalable } from './../../types/index'
+
+export interface ScaleConfig extends Scalable {
   minScale: number,
   maxScale: number,
   step: number
 }
 
-export const initialState: ScaleReducerInitialState = {
+export const initialState: ScaleConfig = {
   scale: 1.0,
   minScale: 0.15,
   maxScale: 1.5,
@@ -38,7 +39,7 @@ export const set = (val:number): Action => {
   }
 }
 
-const scaleReducer = (state: ScaleReducerInitialState, action: Action) => {
+const scaleReducer = (state: ScaleConfig, action: Action) => {
   let scale = state.scale
   if (action.type === ActionKind.INCREMENT) {
     scale += state.step

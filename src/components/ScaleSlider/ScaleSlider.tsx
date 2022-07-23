@@ -2,12 +2,9 @@ import { FC } from 'react'
 import { Slider, Row, Col, Tooltip } from 'antd'
 import { FullscreenOutlined } from '@ant-design/icons'
 import styles from './ScaleSlider.module.scss'
+import { ScaleConfig } from '../ScaleOnCtrlWheel/scaleReducer'
 
-interface IScaleSlider {
-  minScale: number,
-  maxScale: number,
-  scale: number,
-  step: number,
+interface IScaleSlider extends ScaleConfig {
   setScale: Function
 }
 

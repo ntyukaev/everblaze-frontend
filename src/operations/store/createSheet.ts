@@ -1,8 +1,9 @@
+import { SheetProps } from '../../types/index'
 import apollo from '../../apollo'
 import readSheets from './readSheets'
-import { Sheet, GET_SHEETS } from '../queries/getSheets'
+import { GET_SHEETS } from '../queries/getSheets'
 
-const writeSheet = (data: Sheet, variables: { reportId: number }) => {
+const createSheet = (data: SheetProps, variables: { reportId: number }) => {
   const { sheets } = readSheets(variables)
   apollo.writeQuery({
     query: GET_SHEETS,
@@ -16,4 +17,4 @@ const writeSheet = (data: Sheet, variables: { reportId: number }) => {
   })
 }
 
-export default writeSheet
+export default createSheet

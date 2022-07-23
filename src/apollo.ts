@@ -1,11 +1,15 @@
 import { InMemoryCache, ApolloClient, gql, makeVar } from '@apollo/client'
+import { CrudEnum } from './types'
 
 const GRAPHQL_ENDPOINT = 'http://localhost:8000/graphql'
 
 const typeDefs = gql`
-  extend type Query {
+  extend type Report {
     selectedSheet: Int
     selectedChart: Int
+  }
+  extend type Chart {
+    status: String
   }
 `
 
@@ -24,6 +28,18 @@ export const cache = new InMemoryCache({
         selectedChart: {
           read () {
             return selectedChartVar()
+          }
+        }
+      }
+    },
+    Chart: {
+      fields: {
+        status: {
+          read (_) {
+            return _ || CrudEnum.READ
+          },
+          merge (_, incoming) {
+            return incoming
           }
         }
       }

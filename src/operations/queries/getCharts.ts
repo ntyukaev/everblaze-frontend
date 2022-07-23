@@ -1,4 +1,3 @@
-import { CHART_FIELDS } from './fragments'
 import { ChartTypeEnum } from '../../types'
 import { gql } from '@apollo/client'
 export interface Chart {
@@ -13,14 +12,17 @@ export interface ChartsData {
 }
 
 export interface ChartsVars {
-  sheetId: number
+  sheetId: number | null
 }
 
 export const GET_CHARTS = gql`
-  ${CHART_FIELDS}
   query Charts($sheetId: Int!) {
     charts(sheet_id: $sheetId) {
-      ...ChartFields
+      id
+      type
+      x
+      y
+      status @client
     }
   }
 `

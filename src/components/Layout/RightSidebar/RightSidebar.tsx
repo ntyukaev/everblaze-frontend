@@ -22,7 +22,7 @@ const RightSidebar: FC<RightSidebarType> = ({ title, children }) => {
   }
 
   return (
-    <div className={`${styles.RightSidebar} ${collapsed && styles.collapsed}`}>
+    <div className={`${styles.RightSidebar}` + (collapsed ? ` ${styles.collapsed}` : '')}>
       <div onClick={handleClick} className={styles.RightSidebarHeading}>
         <div className={styles.RightSidebarTitle}>
           <Text strong={true}>{title}</Text>

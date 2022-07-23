@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client'
 import { Spin } from 'antd'
 import { GET_SHEETS } from '../../../operations/queries/getSheets'
 import { selectedSheetVar } from '../../../apollo'
-import { writeSheet } from '../../../operations/store'
+import { createSheet } from '../../../operations/store'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
 import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
 import DataLoader from '../../DataLoader'
@@ -11,17 +11,16 @@ import ScaleSlider from '../../ScaleSlider'
 import Sheet from './Sheet'
 import SheetList from './SheetList'
 import styles from './Report.module.scss'
-import { ScaleReducerInitialState } from '../../ScaleOnCtrlWheel/scaleReducer'
+import { ScaleConfig } from '../../ScaleOnCtrlWheel/scaleReducer'
+import VisualizationPane from './VisualizationPane'
+import { IReport, SelectableSheet } from '../../../types'
 
-interface IReport {
-  id: number,
-  name: string,
-  selectedSheet: number,
-  scaleConfig: ScaleReducerInitialState,
+interface IReportWithScale extends IReport, SelectableSheet {
+  scaleConfig: ScaleConfig,
   setScale: Function
 }
 
-const Report: FC<IReport> = ({ id, name, selectedSheet, scaleConfig, setScale }) => {
+const Report: FC<IReportWithScale> = ({ id, name, selectedSheet, scaleConfig, setScale }) => {
   const reportId = id
   const { error, loading, data } = useQuery(GET_SHEETS, { variables: { reportId } })
   useEffect(() => {
@@ -30,7 +29,7 @@ const Report: FC<IReport> = ({ id, name, selectedSheet, scaleConfig, setScale })
         if (data.sheets.length > 0) {
           selectedSheetVar(data.sheets[0].id)
         } else {
-          writeSheet({ index: 0, id: 10003, name: 'New Sheet' }, { reportId })
+          createSheet({ index: 0, name: 'New Sheet' }, { reportId })
         }
       }
     }
@@ -61,7 +60,7 @@ const Report: FC<IReport> = ({ id, name, selectedSheet, scaleConfig, setScale })
           </Playground.Canvas>
           <Playground.Sidebars>
             <RightSidebar key='Visualizations' title="Visualizations">
-              <div>Visualizations</div>
+              <VisualizationPane/>
             </RightSidebar>
             <RightSidebar key="Fields" title="Fields">
               <div>Visualizations</div>

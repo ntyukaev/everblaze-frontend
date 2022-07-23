@@ -4,11 +4,9 @@ import { ChartsData, ChartsVars, GET_CHARTS } from '../../../../operations/queri
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
 import { selectedChartVar } from '../../../../apollo'
+import { Scalable, SelectableSheet } from '../../../../types'
 
-interface IChartList {
-  selectedSheet: number,
-  scale: number
-}
+interface IChartList extends SelectableSheet, Scalable {}
 
 const ChartList: FC<IChartList> = ({ selectedSheet, scale }) => {
   const ref = useRef<HTMLDivElement>(null)
@@ -41,12 +39,6 @@ const ChartList: FC<IChartList> = ({ selectedSheet, scale }) => {
       <div className={styles.ChartList}>Loading</div>
     )
   }
-
-  // const handleClick = (e:React.MouseEvent<HTMLElement>) => {
-  //   e.stopPropagation()
-  //   console.log('ChartList')
-  //   selectedChartVar(null)
-  // }
 
   return (
     <div ref={ref} className={styles.ChartList}>
