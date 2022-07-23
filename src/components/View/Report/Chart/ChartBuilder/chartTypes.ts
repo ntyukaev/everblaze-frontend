@@ -1,8 +1,8 @@
-import { ChartTypes } from '../../../../../operations/queries/getCharts'
+import { ChartTypeEnum } from '../../../../../types'
 import LineChart from './LineChart'
 
 const chartTypes = {
-  [ChartTypes.LINE_CHART]: LineChart
+  [ChartTypeEnum.LINE_CHART]: LineChart
 }
 
 export default chartTypes

@@ -1,15 +1,15 @@
 import { FC } from 'react'
-import { ChartTypes } from '../../../../../operations/queries/getCharts'
+import { ChartTypeEnum } from '../../../../../types'
 import { FieldMapping, IInputData } from '../utils'
 import chartTypes from './chartTypes'
 
-interface IChartBuilder {
-  type: keyof typeof ChartTypes,
+type ChartBuilderProps = {
+  type: keyof typeof ChartTypeEnum,
   data: IInputData,
   fields: FieldMapping
 }
 
-const ChartBuilder: FC<IChartBuilder> = ({ type, data, fields }) => {
+const ChartBuilder: FC<ChartBuilderProps> = ({ type, data, fields }) => {
   const ChartComponent = chartTypes[type]
   return (
     <ChartComponent data={data} fields={fields}/>

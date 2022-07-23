@@ -1,11 +1,11 @@
-import { RegisterInput, LoginInput } from '../api/auth'
 import { createContext, useContext, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import * as auth from '../api/auth'
+import { LoginInput, RegisterInput, UserProps } from '../types'
 
 type AuthContextType = {
-  user?: auth.UserType,
+  user?: UserProps
   error?: any,
   login?: Function,
   register?: Function

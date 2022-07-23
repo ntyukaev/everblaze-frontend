@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client'
-import { Column, COLUMN_FIELDS } from './fragments'
+import { ColumnProps } from '../../types'
+import { COLUMN_FIELDS } from './fragments'
 
 export enum FieldTypes {
   X,
@@ -8,7 +9,7 @@ export enum FieldTypes {
 export interface Field {
   id: number,
   type: keyof typeof FieldTypes,
-  column: Column
+  column: ColumnProps
 }
 
 export interface FieldsData {

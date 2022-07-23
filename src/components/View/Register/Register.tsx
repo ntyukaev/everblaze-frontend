@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd'
-import { RegisterInput } from '../../../api/auth'
 import useAuth from '../../../context/useAuth'
+import { RegisterInput } from '../../../types'
 import styles from './Register.module.scss'
 
 const Register = () => {

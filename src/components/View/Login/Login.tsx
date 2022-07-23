@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd'
-import { LoginInput } from '../../../api/auth'
 import useAuth from '../../../context/useAuth'
+import { LoginInput } from '../../../types'
 import styles from './Login.module.scss'
 
 const Login = () => {

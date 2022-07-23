@@ -5,17 +5,9 @@ import { FieldsData, FieldsVars, GET_FIELDS } from '../../../../operations/queri
 import ChartBuilder from './ChartBuilder'
 import styles from './Chart.module.scss'
 import { FC } from 'react'
-import { ChartTypes } from '../../../../operations/queries/getCharts'
+import { ChartProps } from '../../../../types'
 
-interface IChart {
-  id: number,
-  type: keyof typeof ChartTypes,
-  x: number,
-  y: number,
-  scale: number
-}
-
-const Chart: FC<IChart> = ({ x, y, scale, type, id }) => {
+const Chart: FC<ChartProps> = ({ x, y, scale, type, id }) => {
   const chartId = id
   const { error, loading, data } = useQuery<FieldsData, FieldsVars>(GET_FIELDS, { variables: { chartId } })
 

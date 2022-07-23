@@ -1,5 +1,5 @@
+import { CellProps } from '../../../../types'
 import { Field } from './../../../../operations/queries/getFields'
-import { Cell } from '../../../../operations/queries/fragments'
 
 export const getColumnNames = (fields: Field[]): string[] => {
   const count: { [name: string]: number } = {}
@@ -26,7 +26,7 @@ export type IInputData = Array<Record<string, any>>
 export const getInputData = (fields: Field[], columnNames: string[]): IInputData => {
   const data: Record<string, any>[] = Array.from({ length: fields[0].column.cells.length }, () => { return {} })
   return fields.reduce((acc: IInputData, cur: Field, fieldIndex:number) => {
-    cur.column.cells.forEach((cell: Cell, cellIndex: number) => {
+    cur.column.cells.forEach((cell: CellProps, cellIndex: number) => {
       const columnName = columnNames[fieldIndex]
       acc[cellIndex][columnName] = cell.value
     })

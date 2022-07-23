@@ -1,12 +1,8 @@
+import { ChartTypeEnum } from '../../types'
 import { gql } from '@apollo/client'
-
-export enum ChartTypes {
-  LINE_CHART = 'LINE_CHART',
-}
-
 export interface Chart {
   id: number,
-  type: keyof typeof ChartTypes,
+  type: keyof typeof ChartTypeEnum,
   x: number,
   y: number
 }
