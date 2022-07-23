@@ -20,3 +20,12 @@ export const COLUMN_FIELDS = gql`
     }
   }
 `
+
+export const CHART_FIELDS = gql`
+  fragment ChartFields on Chart {
+    id
+    type
+    x
+    y
+  }
+`

@@ -8,29 +8,22 @@ const typeDefs = gql`
     selectedChart: Int
   }
 `
-type selectedVar = {
-  [key: number]: number
-}
-// TODO: Fix this assignment to just single value
-export const selectedSheetsVar = makeVar<selectedVar>({})
-export const selectedChartsVar = makeVar<selectedVar>({})
+
+export const selectedSheetVar = makeVar<number | null>(null)
+export const selectedChartVar = makeVar<number | null>(null)
 
 export const cache = new InMemoryCache({
   typePolicies: {
     Report: {
       fields: {
         selectedSheet: {
-          read (_, { readField }) {
-            // @ts-ignore: Object is possibly 'null'.
-            const id: number = +readField('id')
-            return selectedSheetsVar()[id] || null
+          read () {
+            return selectedSheetVar()
           }
         },
         selectedChart: {
-          read (_, { readField }) {
-            // @ts-ignore: Object is possibly 'null'.
-            const id: number = +readField('id')
-            return selectedChartsVar()[id] || null
+          read () {
+            return selectedChartVar()
           }
         }
       }

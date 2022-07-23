@@ -1,3 +1,13 @@
 .Chart {
-  background-color: $primary-color;
+  width: 100%;
+  height: 100%;
+  @include border($top: true, $right: true,
+    $bottom: true, $left: true,
+    $style: dotted, $color: $secondary-color);
+}
+
+.ChartSelected {
+  @include border($top: true, $right: true,
+    $bottom: true, $left: true,
+    $style: dotted, $color: $orange);
 }

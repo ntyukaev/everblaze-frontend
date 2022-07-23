@@ -1,8 +1,9 @@
+import { FC, useEffect, useRef } from 'react'
 import { useQuery } from '@apollo/client'
-import { FC } from 'react'
 import { ChartsData, ChartsVars, GET_CHARTS } from '../../../../operations/queries/getCharts'
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
+import { selectedChartVar } from '../../../../apollo'
 
 interface IChartList {
   selectedSheet: number,
@@ -10,7 +11,24 @@ interface IChartList {
 }
 
 const ChartList: FC<IChartList> = ({ selectedSheet, scale }) => {
+  const ref = useRef<HTMLDivElement>(null)
   const { error, loading, data } = useQuery<ChartsData, ChartsVars>(GET_CHARTS, { variables: { sheetId: selectedSheet } })
+
+  useEffect(() => {
+    if (ref.current) {
+      if (selectedChartVar() != null) {
+        ref.current.addEventListener('mousedown', unselect)
+      } else {
+        ref.current.removeEventListener('mousedown', unselect)
+      }
+    }
+  }, [selectedChartVar(), ref])
+
+  const unselect = () => {
+    // @ts-ignore: Object is possibly 'null'
+    ref.current.removeEventListener('mouseup', unselect)
+    selectedChartVar(null)
+  }
 
   if (error) {
     return (
@@ -24,8 +42,14 @@ const ChartList: FC<IChartList> = ({ selectedSheet, scale }) => {
     )
   }
 
+  // const handleClick = (e:React.MouseEvent<HTMLElement>) => {
+  //   e.stopPropagation()
+  //   console.log('ChartList')
+  //   selectedChartVar(null)
+  // }
+
   return (
-    <div className={styles.ChartList}>
+    <div ref={ref} className={styles.ChartList}>
       {data!.charts.map((chart) => (
         <Chart scale={scale} key={chart.id} {...chart} />
       ))}

@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { Spin } from 'antd'
 import { GET_SHEETS } from '../../../operations/queries/getSheets'
-import { selectedSheetsVar } from '../../../apollo'
+import { selectedSheetVar } from '../../../apollo'
 import { writeSheet } from '../../../operations/store'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
 import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
@@ -28,10 +28,7 @@ const Report: FC<IReport> = ({ id, name, selectedSheet, scaleConfig, setScale })
     if (!selectedSheet) {
       if (data?.sheets) {
         if (data.sheets.length > 0) {
-          selectedSheetsVar({
-            ...selectedSheetsVar(),
-            [reportId]: data.sheets[0].id
-          })
+          selectedSheetVar(data.sheets[0].id)
         } else {
           writeSheet({ index: 0, id: 10003, name: 'New Sheet' }, { reportId })
         }

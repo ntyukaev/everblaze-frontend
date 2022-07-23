@@ -6,6 +6,7 @@ import ChartBuilder from './ChartBuilder'
 import styles from './Chart.module.scss'
 import { FC } from 'react'
 import { ChartProps } from '../../../../types'
+import { selectedChartVar } from '../../../../apollo'
 
 const Chart: FC<ChartProps> = ({ x, y, scale, type, id }) => {
   const chartId = id
@@ -36,9 +37,13 @@ const Chart: FC<ChartProps> = ({ x, y, scale, type, id }) => {
   const inputData = getInputData(data!.fields, columnNames)
   const fieldMapping = getFieldMapping(data!.fields, columnNames)
 
+  const handleMouseDown = () => {
+    console.log('Chart')
+    selectedChartVar(id)
+  }
+
   return (
     <Rnd
-      className={styles.Chart}
       bounds='parent'
       scale={scale}
       default={{
@@ -48,7 +53,10 @@ const Chart: FC<ChartProps> = ({ x, y, scale, type, id }) => {
         height: '30%'
       }}
     >
-      <ChartBuilder type={type} data={inputData} fields={fieldMapping} />
+      <div onMouseDown={handleMouseDown}
+      className={`${styles.Chart}` + (selectedChartVar() === id ? ` ${styles.ChartSelected}` : '')}>
+        <ChartBuilder type={type} data={inputData} fields={fieldMapping} />
+      </div>
     </Rnd>
   )
 }
