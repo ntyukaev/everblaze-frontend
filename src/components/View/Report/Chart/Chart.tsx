@@ -5,21 +5,24 @@ import { FieldsData, FieldsVars, GET_FIELDS } from '../../../../operations/queri
 import ChartBuilder from './ChartBuilder'
 import styles from './Chart.module.scss'
 import { FC } from 'react'
-import { IChart, Scalable } from '../../../../types'
-import { selectedChartVar } from '../../../../apollo'
+import { IChart, Identity, Scalable, SelectableChart } from '../../../../types'
+import { updateReport } from '../../../../operations/store'
 
-interface ChartWithScale extends Scalable, IChart { }
+interface ChartWithScale extends Scalable, IChart, SelectableChart {
+  reportId: Identity
+}
 
-const withDraggable = (Component: any) => function withDraggable ({ x, y, scale, type, id }: ChartWithScale) {
+const withDraggable = (Component: any) => function withDraggable ({ x, y, scale, type, id, reportId, selectedChart }: ChartWithScale) {
   const handleMouseDown = () => {
-    selectedChartVar(id)
+    console.log(id)
+    updateReport({ selectedChart: id }, { reportId })
   }
   return (
     <Rnd
       onMouseDown={handleMouseDown}
       bounds='parent'
       scale={scale}
-      className={`${styles.Chart}` + (selectedChartVar() === id ? ` ${styles.ChartSelected}` : '')}
+      className={`${styles.Chart}` + (selectedChart === id ? ` ${styles.ChartSelected}` : '')}
       default={{
         x,
         y,
@@ -27,7 +30,7 @@ const withDraggable = (Component: any) => function withDraggable ({ x, y, scale,
         height: '30%'
       }}
     >
-      <Component type={type} id={id} />
+      <Component reportId={reportId} type={type} id={id} />
     </Rnd>
   )
 }

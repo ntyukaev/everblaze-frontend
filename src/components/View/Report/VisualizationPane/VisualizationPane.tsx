@@ -1,17 +1,23 @@
 import { Button } from 'antd'
-import { selectedSheetVar } from '../../../../apollo'
-import createChart from '../../../../operations/store/createChart'
-import { ChartTypeEnum } from '../../../../types'
+import { FC } from 'react'
+import { createChart, deleteChart } from '../../../../operations/store'
+import { ChartTypeEnum, SelectableChart, SelectableSheet } from '../../../../types'
 
-const VisualizationPane = () => {
-  const handleClick = () => {
-    createChart({ type: ChartTypeEnum.LINE_CHART, x: 0, y: 0 }, { sheetId: selectedSheetVar() })
+interface IVisualizationPane extends SelectableSheet, SelectableChart {}
+
+const VisualizationPane: FC<IVisualizationPane> = ({ selectedSheet, selectedChart }) => {
+  const handleCreateChart = () => {
+    createChart({ type: ChartTypeEnum.LINE_CHART, x: 0, y: 0 }, { sheetId: selectedSheet })
+  }
+
+  const handleDeleteChart = () => {
+    deleteChart(selectedChart)
   }
   return (
     <div>
-      <Button onClick={handleClick}>Create Chart</Button>
-      <Button onClick={handleClick}>Delete Chart</Button>
+      <Button onClick={handleCreateChart}>Create Chart</Button>
       <Button>{ChartTypeEnum.LINE_CHART}</Button>
+      { selectedChart && <Button onClick={handleDeleteChart}>Delete Chart</Button> }
     </div>
   )
 }

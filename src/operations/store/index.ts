@@ -1,11 +1,21 @@
-import createSheet from './createSheet'
-import readSheets from './readSheets'
+// create
 import createChart from './createChart'
+import createSheet from './createSheet'
+// read
 import readCharts from './readCharts'
+import readReport from './readReport'
+import readSheets from './readSheets'
+// update
+import updateReport from './updateReport'
+// delete
+import deleteChart from './deleteChart'
 
 export {
-  createSheet,
-  readSheets,
   createChart,
-  readCharts
+  createSheet,
+  readCharts,
+  readReport,
+  readSheets,
+  updateReport,
+  deleteChart
 }

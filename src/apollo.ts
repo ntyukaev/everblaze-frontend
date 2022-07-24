@@ -1,5 +1,4 @@
-import { NullableIdentity } from './types/index'
-import { InMemoryCache, ApolloClient, gql, makeVar } from '@apollo/client'
+import { InMemoryCache, ApolloClient, gql } from '@apollo/client'
 import { CrudEnum } from './types'
 
 const GRAPHQL_ENDPOINT = 'http://localhost:8000/graphql'
@@ -14,21 +13,18 @@ const typeDefs = gql`
   }
 `
 
-export const selectedSheetVar = makeVar<NullableIdentity>(null)
-export const selectedChartVar = makeVar<NullableIdentity>(null)
-
 export const cache = new InMemoryCache({
   typePolicies: {
     Report: {
       fields: {
         selectedSheet: {
-          read () {
-            return selectedSheetVar()
+          read (_) {
+            return _ || null
           }
         },
         selectedChart: {
-          read () {
-            return selectedChartVar()
+          read (_) {
+            return _ || null
           }
         }
       }
@@ -38,9 +34,6 @@ export const cache = new InMemoryCache({
         status: {
           read (_) {
             return _ || CrudEnum.READ
-          },
-          merge (_, incoming) {
-            return incoming
           }
         }
       }

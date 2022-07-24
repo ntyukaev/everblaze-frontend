@@ -42,7 +42,7 @@ export type SelectableChart = {
   selectedChart: number | null;
 }
 
-export interface IReport extends ReportProps, Identifiable {}
+export interface IReport extends ReportProps, Identifiable, SelectableChart, SelectableSheet {}
 
 export type ChartProps = {
   type: keyof typeof ChartTypeEnum,
@@ -50,7 +50,7 @@ export type ChartProps = {
   y: number
 }
 
-export interface IChart extends ChartProps, Identifiable {}
+export interface IChart extends ChartProps, Identifiable, Crudable {}
 
 export type SheetProps = {
   index: number,

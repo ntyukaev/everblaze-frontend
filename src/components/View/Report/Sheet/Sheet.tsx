@@ -1,24 +1,24 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { Scalable, SelectableSheet } from '../../../../types'
+import { Identity, Scalable, SelectableChart, SelectableSheet } from '../../../../types'
 import ChartList from '../ChartList'
 import styles from './Sheet.module.scss'
 
-interface IScalableSheetContainer {
-  scale?: number
-}
+interface IScalableSheetContainer extends Scalable {}
 
 const ScalableSheetContainer = styled.div<IScalableSheetContainer>`
   transform: scale(${(props) => props.scale})
 `
 
-interface ISheet extends SelectableSheet, Scalable {}
+interface ISheet extends SelectableSheet, SelectableChart, Scalable {
+  reportId: Identity
+}
 
-const Sheet: FC<ISheet> = ({ selectedSheet, scale }) => {
+const Sheet: FC<ISheet> = ({ selectedSheet, selectedChart, scale, reportId }) => {
   return (
     <div className={styles.Sheet}>
       <ScalableSheetContainer scale={scale} className={styles.ScalableSheetContainer}>
-        <ChartList scale={scale} selectedSheet={selectedSheet} />
+        <ChartList reportId={reportId} scale={scale} selectedSheet={selectedSheet} selectedChart={selectedChart} />
       </ScalableSheetContainer>
     </div>
   )

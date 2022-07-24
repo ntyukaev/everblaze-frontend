@@ -2,8 +2,7 @@ import { FC, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { Spin } from 'antd'
 import { GET_SHEETS } from '../../../operations/queries/getSheets'
-import { selectedSheetVar } from '../../../apollo'
-import { createSheet } from '../../../operations/store'
+import { createSheet, updateReport } from '../../../operations/store'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
 import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
 import DataLoader from '../../DataLoader'
@@ -13,21 +12,21 @@ import SheetList from './SheetList'
 import styles from './Report.module.scss'
 import { ScaleConfig } from '../../ScaleOnCtrlWheel/scaleReducer'
 import VisualizationPane from './VisualizationPane'
-import { IReport, SelectableSheet } from '../../../types'
+import { IReport, SelectableChart, SelectableSheet } from '../../../types'
 
-interface IReportWithScale extends IReport, SelectableSheet {
+interface IReportWithScale extends IReport, SelectableSheet, SelectableChart {
   scaleConfig: ScaleConfig,
   setScale: Function
 }
 
-const Report: FC<IReportWithScale> = ({ id, name, selectedSheet, scaleConfig, setScale }) => {
+const Report: FC<IReportWithScale> = ({ id, name, selectedChart, selectedSheet, scaleConfig, setScale }) => {
   const reportId = id
   const { error, loading, data } = useQuery(GET_SHEETS, { variables: { reportId } })
   useEffect(() => {
     if (!selectedSheet) {
       if (data?.sheets) {
         if (data.sheets.length > 0) {
-          selectedSheetVar(data.sheets[0].id)
+          updateReport({ selectedSheet: data.sheets[0].id }, { reportId: id })
         } else {
           createSheet({ index: 0, name: 'New Sheet' }, { reportId })
         }
@@ -53,14 +52,15 @@ const Report: FC<IReportWithScale> = ({ id, name, selectedSheet, scaleConfig, se
       <Playground>
         <Playground.Body>
           <Playground.Canvas>
-            <Sheet scale={scaleConfig.scale} selectedSheet={selectedSheet} />
+            <Sheet reportId={reportId} scale={scaleConfig.scale}
+              selectedChart={selectedChart} selectedSheet={selectedSheet} />
             <TabList>
               <SheetList selectedSheet={selectedSheet} sheets={data.sheets} />
             </TabList>
           </Playground.Canvas>
           <Playground.Sidebars>
             <RightSidebar key='Visualizations' title="Visualizations">
-              <VisualizationPane/>
+              <VisualizationPane selectedChart={selectedChart} selectedSheet={selectedSheet}/>
             </RightSidebar>
             <RightSidebar key="Fields" title="Fields">
               <div>Visualizations</div>
