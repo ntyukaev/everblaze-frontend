@@ -19,8 +19,10 @@ export interface Crudable {
   status: keyof typeof CrudEnum
 }
 
+export type Identity = number | string
+export type NullableIdentity = Identity | null
 export interface Identifiable {
-  id: number
+  id: NullableIdentity
 }
 
 export type ReportProps = {

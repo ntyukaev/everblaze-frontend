@@ -1,3 +1,4 @@
+import { NullableIdentity } from './../../types/index'
 import { getNewId } from './utils'
 import { GET_CHARTS } from './../queries/getCharts'
 import apollo from '../../apollo'
@@ -5,7 +6,7 @@ import readCharts from './readCharts'
 import { ChartProps, CrudEnum } from '../../types'
 import { GET_FIELDS } from '../queries/getFields'
 
-const createChart = (data: ChartProps, variables: { sheetId: number | null }) => {
+const createChart = (data: ChartProps, variables: { sheetId: NullableIdentity }) => {
   const { charts } = readCharts(variables)
   const chartId = getNewId()
   apollo.writeQuery({

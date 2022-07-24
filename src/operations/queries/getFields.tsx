@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { IField } from '../../types'
+import { IField, NullableIdentity } from '../../types'
 import { COLUMN_FIELDS } from './fragments'
 
 export interface FieldsData {
@@ -7,7 +7,7 @@ export interface FieldsData {
 }
 
 export interface FieldsVars {
-  chartId: number
+  chartId: NullableIdentity
 }
 
 export const GET_FIELDS = gql`

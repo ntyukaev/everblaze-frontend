@@ -1,3 +1,4 @@
+import { NullableIdentity } from './types/index'
 import { InMemoryCache, ApolloClient, gql, makeVar } from '@apollo/client'
 import { CrudEnum } from './types'
 
@@ -13,8 +14,8 @@ const typeDefs = gql`
   }
 `
 
-export const selectedSheetVar = makeVar<number | null>(null)
-export const selectedChartVar = makeVar<number | null>(null)
+export const selectedSheetVar = makeVar<NullableIdentity>(null)
+export const selectedChartVar = makeVar<NullableIdentity>(null)
 
 export const cache = new InMemoryCache({
   typePolicies: {
