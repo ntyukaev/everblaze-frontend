@@ -1,6 +1,6 @@
 import { Button } from 'antd'
 import { FC } from 'react'
-import { createChart, deleteChart } from '../../../../operations/store'
+import { createChart, deleteChart, updateChart } from '../../../../operations/store'
 import { ChartTypeEnum, SelectableChart, SelectableSheet } from '../../../../types'
 
 interface IVisualizationPane extends SelectableSheet, SelectableChart {}
@@ -13,10 +13,28 @@ const VisualizationPane: FC<IVisualizationPane> = ({ selectedSheet, selectedChar
   const handleDeleteChart = () => {
     deleteChart(selectedChart)
   }
+
+  const handleToLineChart = () => {
+    if (selectedChart) {
+      updateChart({ type: ChartTypeEnum.LINE_CHART }, selectedChart)
+    } else {
+      console.log('Not yet implemented')
+    }
+  }
+
+  const handleToBarChart = () => {
+    if (selectedChart) {
+      updateChart({ type: ChartTypeEnum.BAR_CHART }, selectedChart)
+    } else {
+      console.log('Not yet implemented')
+    }
+  }
+
   return (
     <div>
       <Button onClick={handleCreateChart}>Create Chart</Button>
-      <Button>{ChartTypeEnum.LINE_CHART}</Button>
+      <Button onClick={handleToLineChart}>{ChartTypeEnum.LINE_CHART}</Button>
+      <Button onClick={handleToBarChart}>{ChartTypeEnum.BAR_CHART}</Button>
       { selectedChart && <Button onClick={handleDeleteChart}>Delete Chart</Button> }
     </div>
   )
