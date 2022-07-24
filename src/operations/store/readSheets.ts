@@ -1,8 +1,8 @@
 import { GET_SHEETS } from './../queries/getSheets'
 import apollo from '../../apollo'
-import { NullableIdentity } from '../../types'
+import { Identity } from '../../types'
 
-const readSheets = (variables: { reportId: NullableIdentity }) => {
+const readSheets = (variables: { reportId: Identity }) => {
   return apollo.readQuery({
     query: GET_SHEETS,
     variables

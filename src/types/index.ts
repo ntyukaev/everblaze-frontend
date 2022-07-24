@@ -21,7 +21,12 @@ export interface Crudable {
 
 export type Identity = number | string
 export type NullableIdentity = Identity | null
+
 export interface Identifiable {
+  id: Identity
+}
+
+export interface NullableIdentifiable {
   id: NullableIdentity
 }
 
