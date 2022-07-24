@@ -1,3 +1,4 @@
+import { NullableIdentity } from './../../types/index'
 import { CHART_FIELDS } from './fragments'
 import { gql } from '@apollo/client'
 import { IChart } from '../../types'
@@ -6,7 +7,7 @@ export interface ChartsData {
 }
 
 export interface ChartsVars {
-  sheetId: number | null
+  sheetId: NullableIdentity
 }
 
 export const GET_CHARTS = gql`

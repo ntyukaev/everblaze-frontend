@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { Identity, Scalable, SelectableChart, SelectableSheet } from '../../../../types'
+import { Identity, Scalable, SelectableChart, SelectableSheet } from '../../types'
 import ChartList from '../ChartList'
 import styles from './Sheet.module.scss'
 

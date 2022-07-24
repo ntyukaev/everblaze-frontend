@@ -1,7 +1,7 @@
 import { Button } from 'antd'
 import { FC } from 'react'
-import { createChart, deleteChart, updateChart } from '../../../../operations/store'
-import { ChartTypeEnum, SelectableChart, SelectableSheet } from '../../../../types'
+import { createChart, deleteChart, updateChart } from '../../operations/store'
+import { ChartTypeEnum, SelectableChart, SelectableSheet } from '../../types'
 
 interface IVisualizationPane extends SelectableSheet, SelectableChart {}
 

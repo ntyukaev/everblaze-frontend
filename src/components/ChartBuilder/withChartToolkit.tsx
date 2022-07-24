@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { FieldMapping, IInputData } from '../utils'
+import { FieldMapping, IInputData } from '../Chart/utils'
 
 const byte2Hex = (n: number) => {
   const nybHexString = '0123456789ABCDEF'

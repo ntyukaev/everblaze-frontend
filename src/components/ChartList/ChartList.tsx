@@ -1,10 +1,10 @@
 import { FC, useEffect, useRef } from 'react'
 import { useQuery } from '@apollo/client'
-import { ChartsData, ChartsVars, GET_CHARTS } from '../../../../operations/queries/getCharts'
+import { ChartsData, ChartsVars, GET_CHARTS } from '../../operations/queries/getCharts'
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
-import { CrudEnum, Identity, Scalable, SelectableChart, SelectableSheet } from '../../../../types'
-import { updateReport } from '../../../../operations/store'
+import { CrudEnum, Identity, Scalable, SelectableChart, SelectableSheet } from '../../types'
+import { updateReport } from '../../operations/store'
 
 interface IChartList extends SelectableSheet, SelectableChart, Scalable {
   reportId: Identity

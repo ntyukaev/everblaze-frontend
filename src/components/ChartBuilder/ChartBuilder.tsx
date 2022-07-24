@@ -1,6 +1,6 @@
 import { FC } from 'react'
-import { ChartTypeEnum } from '../../../../../types'
-import { FieldMapping, IInputData } from '../utils'
+import { ChartTypeEnum } from '../../types'
+import { FieldMapping, IInputData } from '../Chart/utils'
 import chartTypes from './chartTypes'
 
 type ChartBuilderProps = {

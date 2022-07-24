@@ -3,6 +3,7 @@ import createChart from './createChart'
 import createSheet from './createSheet'
 // read
 import readChart from './readChart'
+import readDatasets from './readDatasets'
 import readCharts from './readCharts'
 import readReport from './readReport'
 import readSheets from './readSheets'
@@ -15,6 +16,7 @@ import deleteChart from './deleteChart'
 export {
   createChart,
   createSheet,
+  readDatasets,
   readCharts,
   readChart,
   readReport,

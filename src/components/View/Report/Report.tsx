@@ -7,12 +7,13 @@ import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } f
 import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
 import DataLoader from '../../DataLoader'
 import ScaleSlider from '../../ScaleSlider'
-import Sheet from './Sheet'
-import SheetList from './SheetList'
+import Sheet from '../../Sheet'
+import SheetList from '../../SheetList'
 import styles from './Report.module.scss'
 import { ScaleConfig } from '../../ScaleOnCtrlWheel/scaleReducer'
-import VisualizationPane from './VisualizationPane'
+import VisualizationPane from '../../VisualizationPane'
 import { IReport, SelectableChart, SelectableSheet } from '../../../types'
+import FieldPane from '../../FieldPane'
 
 interface IReportWithScale extends IReport, SelectableSheet, SelectableChart {
   scaleConfig: ScaleConfig,
@@ -63,7 +64,7 @@ const Report: FC<IReportWithScale> = ({ id, name, selectedChart, selectedSheet, 
               <VisualizationPane selectedChart={selectedChart} selectedSheet={selectedSheet}/>
             </RightSidebar>
             <RightSidebar key="Fields" title="Fields">
-              <div>Visualizations</div>
+              <FieldPane reportId={reportId}/>
             </RightSidebar>
           </Playground.Sidebars>
         </Playground.Body>

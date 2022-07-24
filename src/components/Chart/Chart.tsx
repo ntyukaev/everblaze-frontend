@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/client'
 import { Rnd } from 'react-rnd'
 import { fieldsSameLength, getInputData, getColumnNames, getFieldMapping } from './utils'
-import { FieldsData, FieldsVars, GET_FIELDS } from '../../../../operations/queries/getFields'
-import ChartBuilder from './ChartBuilder'
+import { GET_FIELDS } from '../../operations/queries/getFields'
+import ChartBuilder from '../ChartBuilder'
 import styles from './Chart.module.scss'
 import { FC } from 'react'
-import { IChart, Identity, Scalable, SelectableChart } from '../../../../types'
-import { updateReport } from '../../../../operations/store'
+import { IChart, Identity, Scalable, SelectableChart } from '../../types'
+import { updateReport } from '../../operations/store'
 
 interface ChartWithScale extends Scalable, IChart, SelectableChart {
   reportId: Identity
@@ -14,7 +14,6 @@ interface ChartWithScale extends Scalable, IChart, SelectableChart {
 
 const withDraggable = (Component: any) => function withDraggable ({ x, y, scale, type, id, reportId, selectedChart }: ChartWithScale) {
   const handleMouseDown = () => {
-    console.log(id)
     updateReport({ selectedChart: id }, { reportId })
   }
   return (
@@ -37,7 +36,7 @@ const withDraggable = (Component: any) => function withDraggable ({ x, y, scale,
 
 const Chart: FC<ChartWithScale> = ({ type, id }) => {
   const chartId = id
-  const { error, loading, data } = useQuery<FieldsData, FieldsVars>(GET_FIELDS, { variables: { chartId } })
+  const { error, loading, data } = useQuery(GET_FIELDS, { variables: { chartId } })
 
   if (error) {
     return (

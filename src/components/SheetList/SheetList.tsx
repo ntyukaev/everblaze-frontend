@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Button } from 'antd'
 import styles from './SheetList.module.scss'
-import { ISheet, SelectableSheet } from '../../../../types'
+import { ISheet, SelectableSheet } from '../../types'
 
 interface ISheetList extends SelectableSheet {
   sheets: ISheet[]

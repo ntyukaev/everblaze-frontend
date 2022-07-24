@@ -1,4 +1,4 @@
-import { CellProps, IField } from '../../../../types'
+import { CellProps, IField } from '../../types'
 
 export const getColumnNames = (fields: IField[]): string[] => {
   const count: { [name: string]: number } = {}

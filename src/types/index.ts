@@ -76,11 +76,12 @@ export interface ICell extends CellProps, Identifiable {}
 export interface ColumnProps {
   name: string,
   index: number,
-  type: keyof typeof CellTypeEnum,
-  cells: CellProps[]
+  type: keyof typeof CellTypeEnum
 }
 
-export interface IColumn extends ColumnProps, Identifiable {}
+export interface IColumn extends ColumnProps, Identifiable {
+  cells: ICell[]
+}
 
 export type FieldProps = {
   type: keyof typeof FieldTypeEnum,
@@ -92,6 +93,14 @@ export interface IField extends FieldProps, Identifiable {}
 export type LoginInput = {
   email: string,
   password: string
+}
+
+export type DatasetProps = {
+  name: string
+}
+
+export interface IDataset extends DatasetProps, Identifiable {
+  columns: IColumn[]
 }
 
 export interface ILoginInput extends LoginInput, Identifiable {}
