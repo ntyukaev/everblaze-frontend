@@ -8,6 +8,10 @@ export enum FieldTypeEnum {
   Y = 'Y'
 }
 
+export enum DragTypeEnum {
+  COLUMN = 'COLUMN'
+}
+
 export enum CrudEnum {
   CREATE = 'CREATE',
   READ = 'READ',

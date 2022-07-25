@@ -30,3 +30,14 @@ export const CHART_FIELDS = gql`
     status @client
   }
 `
+
+export const FIELD_FIELDS = gql`
+  ${COLUMN_FIELDS}
+  fragment FieldFields on Field {
+    id
+    type
+    column {
+      ...ColumnFields
+    }
+  }
+`
