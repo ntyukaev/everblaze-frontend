@@ -64,7 +64,7 @@ const Report: FC<IReportWithScale> = ({ id, name, selectedChart, selectedSheet, 
               <VisualizationPane selectedChart={selectedChart} selectedSheet={selectedSheet}/>
             </RightSidebar>
             <RightSidebar key="Fields" title="Fields">
-              <FieldPane reportId={reportId}/>
+              <FieldPane selectedChart={selectedChart} reportId={reportId}/>
             </RightSidebar>
           </Playground.Sidebars>
         </Playground.Body>

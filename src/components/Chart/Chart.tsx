@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { Rnd } from 'react-rnd'
 import { fieldsSameLength, getInputData, getColumnNames, getFieldMapping } from './utils'
-import { GET_FIELDS } from '../../operations/queries/getFields'
+import { FieldsData, FieldsVars, GET_FIELDS } from '../../operations/queries/getFields'
 import ChartBuilder from '../ChartBuilder'
 import styles from './Chart.module.scss'
 import { FC } from 'react'
@@ -36,7 +36,7 @@ const withDraggable = (Component: any) => function withDraggable ({ x, y, scale,
 
 const Chart: FC<ChartWithScale> = ({ type, id }) => {
   const chartId = id
-  const { error, loading, data } = useQuery(GET_FIELDS, { variables: { chartId } })
+  const { error, loading, data } = useQuery<FieldsData, FieldsVars>(GET_FIELDS, { variables: { chartId } })
 
   if (error) {
     return (

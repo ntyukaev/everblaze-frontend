@@ -1,7 +1,9 @@
 // create
 import createChart from './createChart'
+import createField from './createField'
 import createSheet from './createSheet'
 // read
+import readColumn from './readColumn'
 import readChart from './readChart'
 import readDatasets from './readDatasets'
 import readCharts from './readCharts'
@@ -16,8 +18,10 @@ import deleteChart from './deleteChart'
 
 export {
   createChart,
+  createField,
   createSheet,
   readDatasets,
+  readColumn,
   readCharts,
   readChart,
   readFields,

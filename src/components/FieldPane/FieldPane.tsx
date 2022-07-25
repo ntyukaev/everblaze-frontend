@@ -1,14 +1,15 @@
 import { useQuery } from '@apollo/client'
 import { FC } from 'react'
 import { DatasetData, DatasetsVars, GET_DATASETS } from '../../operations/queries/getDatasets'
-import { Identity } from '../../types'
-import DatasetSection from '../DatasetSection'
+import { Identity, NullableIdentity } from '../../types'
+import DatasetList from '../DatasetList'
 
 interface IFieldPane {
-  reportId: Identity
+  reportId: Identity,
+  selectedChart: NullableIdentity
 }
 
-const FieldPane: FC<IFieldPane> = ({ reportId }) => {
+const FieldPane: FC<IFieldPane> = ({ reportId, selectedChart }) => {
   const { error, loading, data } = useQuery<DatasetData, DatasetsVars>(GET_DATASETS, { variables: { reportId } })
   if (error) {
     return (
@@ -23,7 +24,7 @@ const FieldPane: FC<IFieldPane> = ({ reportId }) => {
 
   return (
     <div>
-      { data!.datasets.map((dataset) => <DatasetSection key={dataset.id} {...dataset} />) }
+      <DatasetList selectedChart={selectedChart} datasets={data!.datasets}/>
     </div>
   )
 }

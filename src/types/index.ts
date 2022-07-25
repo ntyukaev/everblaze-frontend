@@ -132,3 +132,8 @@ export type UserProps = {
 export interface Scalable {
   scale: number
 }
+
+export interface ColumnDropResult {
+  id: Identity,
+  type: keyof typeof FieldTypeEnum
+}

@@ -7,7 +7,8 @@ import styles from './Sheet.module.scss'
 interface IScalableSheetContainer extends Scalable {}
 
 const ScalableSheetContainer = styled.div<IScalableSheetContainer>`
-  transform: scale(${(props) => props.scale})
+  transform: scale(${(props) => props.scale});
+  overflow: hidden;
 `
 
 interface ISheet extends SelectableSheet, SelectableChart, Scalable {

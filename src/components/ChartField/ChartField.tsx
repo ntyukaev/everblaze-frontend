@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { useDrop } from 'react-dnd'
 import { DragTypeEnum, FieldTypeEnum, IField } from '../../types'
-import Column from '../Column'
+import ChartColumn from '../ChartColumn'
 import styles from './ChartField.module.scss'
 
 type IChartField = {
@@ -23,7 +23,7 @@ const ChartField: FC<IChartField> = ({ type, fields }) => {
     <div className={canDrop ? styles.ChartFieldCanDrop : ''}>
       <div>{type}</div>
       <div ref={drop} className={`${styles.ChartField}` + (isActive ? ` ${styles.ChartFieldActive}` : '')}>
-        {fields.map((field) => <Column id={field.id} key={field.id} name={field.column.name} />)}
+        {fields.map((field) => <ChartColumn id={field.id} key={field.id} name={field.column.name} />)}
       </div>
     </div>
   )
