@@ -6,12 +6,12 @@ import Dataset from '../Dataset/Dataset'
 
 interface IDatasetList {
   datasets: IDataset[],
-  selectedChart: NullableIdentity
+  selectedChart?: NullableIdentity
 }
 
 const DatasetList:FC<IDatasetList> = ({ selectedChart, datasets }) => {
   const { error, loading, data } = useQuery<FieldsData, FieldsVars>(GET_FIELDS,
-    { variables: { chartId: selectedChart }, skip: !selectedChart })
+    { variables: { chartId: selectedChart || null }, skip: !selectedChart })
   if (error) {
     console.log(error)
     return (

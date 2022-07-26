@@ -7,6 +7,7 @@ export const GET_REPORT = gql`
       name
       selectedSheet @client
       selectedChart @client
+      selectedDataset @client
     }
   }
 `

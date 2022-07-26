@@ -1,5 +1,5 @@
 import { IDataset, NullableIdentity } from './../../types/index'
-import { COLUMN_FIELDS } from './fragments'
+import { DATASET_FIELDS } from './fragments'
 import { gql } from '@apollo/client'
 
 export interface DatasetData {
@@ -11,14 +11,10 @@ export interface DatasetsVars {
 }
 
 export const GET_DATASETS = gql`
-  ${COLUMN_FIELDS}
+  ${DATASET_FIELDS}
   query Datasets($reportId: Int!) {
     datasets(report_id: $reportId) {
-      id
-      name
-      columns {
-        ...ColumnFields
-      }
+      ...DatasetFields
     }
   }
 `

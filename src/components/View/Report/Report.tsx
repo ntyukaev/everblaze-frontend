@@ -1,7 +1,6 @@
 import { FC, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { Spin } from 'antd'
-import { GET_SHEETS } from '../../../operations/queries/getSheets'
 import { createSheet, updateReport } from '../../../operations/store'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
 import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
@@ -12,22 +11,22 @@ import SheetList from '../../SheetList'
 import styles from './Report.module.scss'
 import { ScaleConfig } from '../../ScaleOnCtrlWheel/scaleReducer'
 import VisualizationPane from '../../VisualizationPane'
-import { IReport, SelectableChart, SelectableSheet } from '../../../types'
+import { IReport, SelectableChart, SelectableDataset, SelectableSheet } from '../../../types'
 import FieldPane from '../../FieldPane'
-
-interface IReportWithScale extends IReport, SelectableSheet, SelectableChart {
+import { GET_SHEETS_AND_DATASETS } from '../../../operations/queries/getSheetsAndDatasets'
+interface IReportWithScale extends IReport, SelectableSheet, SelectableChart, SelectableDataset {
   scaleConfig: ScaleConfig,
   setScale: Function
 }
 
-const Report: FC<IReportWithScale> = ({ id, name, selectedChart, selectedSheet, scaleConfig, setScale }) => {
+const Report: FC<IReportWithScale> = ({ id, name, selectedDataset, selectedChart, selectedSheet, scaleConfig, setScale }) => {
   const reportId = id
-  const { error, loading, data } = useQuery(GET_SHEETS, { variables: { reportId } })
+  const { error, loading, data } = useQuery(GET_SHEETS_AND_DATASETS, { variables: { reportId } })
   useEffect(() => {
     if (!selectedSheet) {
       if (data?.sheets) {
         if (data.sheets.length > 0) {
-          updateReport({ selectedSheet: data.sheets[0].id }, { reportId: id })
+          updateReport({ selectedSheet: data.sheets[0].id }, { reportId })
         } else {
           createSheet({ index: 0, name: 'New Sheet' }, { reportId })
         }
@@ -35,9 +34,18 @@ const Report: FC<IReportWithScale> = ({ id, name, selectedChart, selectedSheet, 
     }
   }, [data, selectedSheet])
 
+  useEffect(() => {
+    if (!selectedDataset) {
+      if (data?.datasets) {
+        updateReport({ selectedDataset: data.datasets[0].id }, { reportId })
+      }
+    }
+  }, [data, selectedDataset])
+
   if (error) {
+    console.log(error)
     return (
-      <div>An error occured</div>
+      <div>An error occured11</div>
     )
   }
   if (loading || !selectedSheet) {
@@ -64,7 +72,7 @@ const Report: FC<IReportWithScale> = ({ id, name, selectedChart, selectedSheet, 
               <VisualizationPane selectedChart={selectedChart} selectedSheet={selectedSheet}/>
             </RightSidebar>
             <RightSidebar key="Fields" title="Fields">
-              <FieldPane selectedChart={selectedChart} reportId={reportId}/>
+              <FieldPane selectedChart={selectedChart} datasets={data.datasets}/>
             </RightSidebar>
           </Playground.Sidebars>
         </Playground.Body>

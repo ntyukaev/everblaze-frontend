@@ -3,6 +3,7 @@ import { gql } from '@apollo/client'
 export const CELL_FIELDS = gql`
   fragment CellFields on Cell {
     id
+    index
     type
     value
   }
@@ -28,6 +29,17 @@ export const CHART_FIELDS = gql`
     x
     y
     status @client
+  }
+`
+
+export const DATASET_FIELDS = gql`
+  ${COLUMN_FIELDS}
+  fragment DatasetFields on Dataset {
+    id
+    name
+    columns {
+      ...ColumnFields
+    }
   }
 `
 

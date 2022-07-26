@@ -2,11 +2,11 @@ import { ISheet, NullableIdentity } from './../../types/index'
 import { gql } from '@apollo/client'
 
 export interface SheetsData {
-  fields: ISheet[]
+  sheets: ISheet[]
 }
 
 export interface SheetsVars {
-  chartId: NullableIdentity
+  reportId: NullableIdentity
 }
 
 export const GET_SHEETS = gql`

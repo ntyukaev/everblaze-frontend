@@ -5,7 +5,7 @@ import { ColumnDropResult, DragTypeEnum, IColumn, NullableIdentity } from '../..
 import styles from './DatasetColumn.module.scss'
 interface IDatasetColumn extends IColumn {
   active: boolean,
-  selectedChart: NullableIdentity
+  selectedChart?: NullableIdentity
 }
 
 const DatasetColumn: FC<IDatasetColumn> = ({ id, selectedChart, name }) => {
@@ -15,7 +15,7 @@ const DatasetColumn: FC<IDatasetColumn> = ({ id, selectedChart, name }) => {
     item: { id },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult<ColumnDropResult>()
-      if (item && dropResult) {
+      if (item && dropResult && selectedChart) {
         console.log(selectedChart)
         console.log(`You dropped ${item.id} into ${dropResult.type}!`)
         createField(dropResult.type, selectedChart, item.id)

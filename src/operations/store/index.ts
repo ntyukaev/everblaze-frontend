@@ -5,6 +5,7 @@ import createSheet from './createSheet'
 // read
 import readColumn from './readColumn'
 import readChart from './readChart'
+import readDataset from './readDataset'
 import readDatasets from './readDatasets'
 import readCharts from './readCharts'
 import readReport from './readReport'
@@ -20,6 +21,7 @@ export {
   createChart,
   createField,
   createSheet,
+  readDataset,
   readDatasets,
   readColumn,
   readCharts,

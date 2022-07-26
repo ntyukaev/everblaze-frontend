@@ -4,7 +4,7 @@ import DatasetColumn from '../DatasetColumn'
 
 interface HasUsedColumns extends IDataset {
   usedColumnIds: Identity[],
-  selectedChart: NullableIdentity
+  selectedChart?: NullableIdentity
 }
 
 const Dataset: FC<HasUsedColumns> = ({ name, selectedChart, columns, usedColumnIds }) => {

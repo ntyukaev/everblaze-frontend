@@ -39,11 +39,15 @@ export type ReportProps = {
 }
 
 export type SelectableSheet = {
-  selectedSheet: number | null;
+  selectedSheet: NullableIdentity;
+}
+
+export type SelectableDataset = {
+  selectedDataset: NullableIdentity;
 }
 
 export type SelectableChart = {
-  selectedChart: number | null;
+  selectedChart: NullableIdentity;
 }
 
 export interface IReport extends ReportProps, Identifiable, SelectableChart, SelectableSheet {}
@@ -72,6 +76,7 @@ export enum CellTypeEnum {
 
 export type CellProps = {
   type: keyof typeof CellTypeEnum,
+  index: number,
   value: any
 }
 

@@ -1,30 +1,16 @@
-import { useQuery } from '@apollo/client'
 import { FC } from 'react'
-import { DatasetData, DatasetsVars, GET_DATASETS } from '../../operations/queries/getDatasets'
-import { Identity, NullableIdentity } from '../../types'
+import { IDataset, NullableIdentity } from '../../types'
 import DatasetList from '../DatasetList'
 
 interface IFieldPane {
-  reportId: Identity,
-  selectedChart: NullableIdentity
+  selectedChart?: NullableIdentity,
+  datasets: IDataset[]
 }
 
-const FieldPane: FC<IFieldPane> = ({ reportId, selectedChart }) => {
-  const { error, loading, data } = useQuery<DatasetData, DatasetsVars>(GET_DATASETS, { variables: { reportId } })
-  if (error) {
-    return (
-      <div>An error occured</div>
-    )
-  }
-  if (loading) {
-    return (
-      <div>Loading...</div>
-    )
-  }
-
+const FieldPane: FC<IFieldPane> = ({ selectedChart, datasets }) => {
   return (
     <div>
-      <DatasetList selectedChart={selectedChart} datasets={data!.datasets}/>
+      <DatasetList selectedChart={selectedChart} datasets={datasets}/>
     </div>
   )
 }

@@ -7,6 +7,7 @@ const typeDefs = gql`
   extend type Report {
     selectedSheet: Int
     selectedChart: Int
+    selectedDataset: Int
   }
   extend type Chart {
     status: String
@@ -23,6 +24,11 @@ export const cache = new InMemoryCache({
           }
         },
         selectedChart: {
+          read (_) {
+            return _ || null
+          }
+        },
+        selectedDataset: {
           read (_) {
             return _ || null
           }
