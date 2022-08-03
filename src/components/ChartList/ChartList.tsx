@@ -1,18 +1,29 @@
-import { FC, useEffect, useRef } from 'react'
+/* eslint-disable */
+import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { ChartsData, ChartsVars, GET_CHARTS } from '../../operations/queries/getCharts'
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
 import { CrudEnum, Identity, Scalable, SelectableChart, SelectableSheet } from '../../types'
 import { updateReport } from '../../operations/store'
+import BoundingLines from '../BoundingLines/BoundingLines'
+import { GridHelper } from './utils'
 
 interface IChartList extends SelectableSheet, SelectableChart, Scalable {
   reportId: Identity
 }
 
 const ChartList: FC<IChartList> = ({ reportId, selectedChart, selectedSheet, scale }) => {
+  const [height, setHeight] = useState(0)
+  const [width, setWidth] = useState<number>(0)
+  const [gridConfig, setGridConfig] = useState<{bounds: number[][][], grid: [number, number]}>({ grid: [1, 1], bounds: [] })
+  const [chartMoving, setChartMoving] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
   const { error, loading, data } = useQuery<ChartsData, ChartsVars>(GET_CHARTS, { variables: { sheetId: selectedSheet } })
+
+  const setChartUpdating = (val: boolean) => {
+    setChartMoving(val)
+  }
 
   useEffect(() => {
     if (ref.current) {
@@ -23,6 +34,23 @@ const ChartList: FC<IChartList> = ({ reportId, selectedChart, selectedSheet, sca
       }
     }
   }, [selectedChart, ref])
+
+  useEffect(() => {
+    if (data?.charts && selectedChart) {
+      const helper = new GridHelper(data!.charts, selectedChart, height, width)
+      helper.snap()
+      helper.createBounds()
+      setGridConfig({
+        grid: helper.grid,
+        bounds: helper.bounds
+      })
+    }
+  }, [data, selectedChart])
+
+  useLayoutEffect(() => {
+    setHeight(ref.current?.clientHeight || 0)
+    setWidth(ref.current?.clientWidth || 0)
+  })
 
   const unselect = () => {
     // @ts-ignore: Object is possibly 'null'
@@ -41,11 +69,17 @@ const ChartList: FC<IChartList> = ({ reportId, selectedChart, selectedSheet, sca
       <div className={styles.ChartList}>Loading</div>
     )
   }
-
   return (
     <div ref={ref} className={styles.ChartList}>
+      {chartMoving && <BoundingLines lines={gridConfig.bounds} width={width} height={height}/>}
       {data!.charts.filter((chart) => chart.status !== CrudEnum.DELETE).map((chart) => (
-        <Chart selectedChart={selectedChart} reportId={reportId} scale={scale} key={chart.id} {...chart} />
+        <Chart
+          grid={gridConfig.grid}
+          canvasWidth={width}
+          canvasHeight={height}
+          setChartUpdating={setChartUpdating}
+          selectedChart={selectedChart}
+          reportId={reportId} scale={scale} key={chart.id} {...chart} />
       ))}
     </div>
   )

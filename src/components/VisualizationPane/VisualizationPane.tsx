@@ -8,7 +8,7 @@ interface IVisualizationPane extends SelectableSheet, SelectableChart {}
 
 const VisualizationPane: FC<IVisualizationPane> = ({ selectedSheet, selectedChart }) => {
   const handleCreateChart = () => {
-    createChart({ type: ChartTypeEnum.LINE_CHART, x: 0, y: 0 }, { sheetId: selectedSheet })
+    createChart({ type: ChartTypeEnum.LINE_CHART, x: 0, y: 0, width: 0.3, height: 0.3 }, { sheetId: selectedSheet })
   }
 
   const handleToLineChart = () => {

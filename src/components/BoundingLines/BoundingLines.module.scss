@@ -1,0 +1,9 @@
+.BoundingLines {
+  position:relative;
+  z-index: 2;
+}
+
+.BoundLine {
+  stroke: $red;
+  stroke-dasharray: 4;
+}

@@ -55,7 +55,9 @@ export interface IReport extends ReportProps, Identifiable, SelectableChart, Sel
 export type ChartProps = {
   type: keyof typeof ChartTypeEnum,
   x: number,
-  y: number
+  y: number,
+  height: number,
+  width: number
 }
 
 export interface IChart extends ChartProps, Identifiable, Crudable {}
@@ -64,6 +66,8 @@ export type SheetProps = {
   index: number,
   name: string
 }
+
+export type NumericTriplet = [number, number, number]
 
 export interface ISheet extends SheetProps, Identifiable {}
 

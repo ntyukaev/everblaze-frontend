@@ -1,33 +1,66 @@
 import { useQuery } from '@apollo/client'
-import { Rnd } from 'react-rnd'
+import { Rnd, RndDragCallback, RndResizeCallback, RndResizeStartCallback } from 'react-rnd'
 import { fieldsSameLength, getInputData, getColumnNames, getFieldMapping } from './utils'
 import { FieldsData, FieldsVars, GET_FIELDS } from '../../operations/queries/getFields'
 import ChartBuilder from '../ChartBuilder'
 import styles from './Chart.module.scss'
 import { FC } from 'react'
 import { IChart, Identity, Scalable, SelectableChart } from '../../types'
-import { updateReport } from '../../operations/store'
+import { updateChart, updateReport } from '../../operations/store'
 
 interface ChartWithScale extends Scalable, IChart, SelectableChart {
-  reportId: Identity
+  reportId: Identity,
+  setChartUpdating: Function,
+  height: number,
+  width: number,
+  canvasHeight: number,
+  canvasWidth: number,
+  grid: [number, number]
 }
 
-const withDraggable = (Component: any) => function withDraggable ({ x, y, scale, type, id, reportId, selectedChart }: ChartWithScale) {
+const withDraggable = (Component: any) => function withDraggable ({ canvasHeight, grid, canvasWidth, height, width, x, y, scale, type, id, reportId, selectedChart, setChartUpdating }: ChartWithScale) {
   const handleMouseDown = () => {
     updateReport({ selectedChart: id }, { reportId })
   }
+
+  const handleDragStart: RndDragCallback = () => {
+    setChartUpdating(true)
+  }
+
+  const handleDrag: RndDragCallback = (_, data) => {
+    const { x, y } = data
+    updateChart({ x, y }, id)
+  }
+
+  const handleDragStop: RndDragCallback = () => {
+    setChartUpdating(false)
+  }
+
+  const handleResizeStart:RndResizeStartCallback = () => {
+    setChartUpdating(true)
+  }
+
+  const handleResize:RndResizeCallback = (_, __, elementRef) => {
+    const height = elementRef.offsetHeight / canvasHeight
+    const width = elementRef.offsetWidth / canvasWidth
+    updateChart({ width, height }, id)
+  }
+
   return (
     <Rnd
+      size={{ width: width * canvasWidth, height: height * canvasHeight }}
+      dragGrid={grid}
+      resizeGrid={grid}
+      position={{ x, y }}
       onMouseDown={handleMouseDown}
+      onDragStart={handleDragStart}
+      onDrag={handleDrag}
+      onDragStop={handleDragStop}
+      onResizeStart={handleResizeStart}
+      onResize={handleResize}
       bounds='parent'
       scale={scale}
       className={`${styles.Chart}` + (selectedChart === id ? ` ${styles.ChartSelected}` : '')}
-      default={{
-        x,
-        y,
-        width: '30%',
-        height: '30%'
-      }}
     >
       <Component reportId={reportId} type={type} id={id} />
     </Rnd>

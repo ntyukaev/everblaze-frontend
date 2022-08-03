@@ -28,6 +28,8 @@ export const CHART_FIELDS = gql`
     type
     x
     y
+    width
+    height
     status @client
   }
 `

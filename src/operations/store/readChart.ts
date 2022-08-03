@@ -1,6 +1,6 @@
 import { CHART_FIELDS } from './../queries/fragments'
 import apollo, { cache } from '../../apollo'
-import { IChart, NullableIdentity } from './../../types/index'
+import { IChart, NullableIdentity } from './../../types'
 
 const readChart = (id: NullableIdentity): IChart | null => {
   return apollo.readFragment({
