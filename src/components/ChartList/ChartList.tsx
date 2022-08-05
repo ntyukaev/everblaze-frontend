@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useQuery } from '@apollo/client'
 import { ChartsData, ChartsVars, GET_CHARTS } from '../../operations/queries/getCharts'

@@ -1,5 +1,4 @@
 import { IChart, Identity, NumericTriplet } from './../../types/index'
-/* eslint-disable */
 import { readChart, updateChart } from '../../operations/store'
 export class GridHelper {
   _gridX: number = 1
@@ -23,8 +22,8 @@ export class GridHelper {
   readonly chartY: NumericTriplet
   readonly canvasPivotsX: NumericTriplet
   readonly canvasPivotsY: NumericTriplet
-  
-  constructor(charts: IChart[], selectedChart: Identity, canvasHeight: number, canvasWidth: number) {
+
+  constructor (charts: IChart[], selectedChart: Identity, canvasHeight: number, canvasWidth: number) {
     if (!selectedChart) {
       throw new Error('No chart is selected')
     }
@@ -52,7 +51,7 @@ export class GridHelper {
     this.pivotsY.push(this.canvasPivotsY)
   }
 
-  _getPivots({ coord, length }: {coord: number, length: number}): NumericTriplet {
+  _getPivots ({ coord, length }: {coord: number, length: number}): NumericTriplet {
     return [coord, coord + length / 2, coord + length]
   }
 
@@ -72,28 +71,36 @@ export class GridHelper {
     ]
   }
 
-  get grid(): [number, number] {
+  get grid (): [number, number] {
     return [this._gridX, this._gridY]
   }
 
-  get bounds(): number[][][] {
+  get bounds (): number[][][] {
     return this._bounds
   }
 
-  set gridX(value: number) {
+  get gridX () {
+    return this._gridX
+  }
+
+  set gridX (value: number) {
     this._gridX = value
   }
 
-  set gridY(value: number) {
+  get gridY () {
+    return this._gridY
+  }
+
+  set gridY (value: number) {
     this._gridY = value
   }
 
-  createBounds(): void {
+  createBounds (): void {
     this._getBoundsX()
     this._getBoundsY()
   }
 
-  snap(): void {
+  snap (): void {
     const updates: { x?: number, y?: number } = {}
     const newX = this.getNewX()
     const newY = this.getNewY()
@@ -110,7 +117,7 @@ export class GridHelper {
     }
   }
 
-  _calcluteDistanceBetweenPivots(selected: NumericTriplet, others: NumericTriplet[]) {
+  _calcluteDistanceBetweenPivots (selected: NumericTriplet, others: NumericTriplet[]) {
     const values: number[][] = []
     others.forEach((other, i1) => {
       other.forEach((piv1, i2) => {
@@ -122,12 +129,12 @@ export class GridHelper {
     return values
   }
 
-  _findClosestPivot(selected: NumericTriplet, others: NumericTriplet[]) {
+  _findClosestPivot (selected: NumericTriplet, others: NumericTriplet[]) {
     const values = this._calcluteDistanceBetweenPivots(selected, others)
     return values.sort((val1, val2) => val1[3] > val2[3] ? 1 : -1)[0]
   }
 
-  _getBoundsX() {
+  _getBoundsX () {
     const values = this._calcluteDistanceBetweenPivots(this.chartX, this.pivotsX)
       .filter(val => val[3] <= this._boundsDeltaX)
     values.forEach((val) => {
@@ -139,7 +146,7 @@ export class GridHelper {
     })
   }
 
-  _getBoundsY() {
+  _getBoundsY () {
     const values = this._calcluteDistanceBetweenPivots(this.chartY, this.pivotsY)
       .filter(val => val[3] <= this._boundsDeltaY)
     values.forEach((val) => {
@@ -151,7 +158,7 @@ export class GridHelper {
     })
   }
 
-  _getCoord(chartCoords: NumericTriplet, pivots: NumericTriplet[], delta: number) {
+  _getCoord (chartCoords: NumericTriplet, pivots: NumericTriplet[], delta: number) {
     const closestPivot = this._findClosestPivot(chartCoords, pivots)
     const [objInd, pivotInd, chartPivot, val] = closestPivot
     if (val <= delta) {
@@ -163,11 +170,11 @@ export class GridHelper {
     return null
   }
 
-  getNewX() {
+  getNewX () {
     return this._getCoord(this.chartX, this.pivotsX, this._deltaX)
   }
 
-  getNewY() {
+  getNewY () {
     return this._getCoord(this.chartY, this.pivotsY, this._deltaY)
   }
 }
