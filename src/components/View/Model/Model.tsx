@@ -1,6 +1,43 @@
 import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../../Layout'
+import FieldPane from '../../FieldPane'
+import DataLoader from '../../DataLoader'
+import { IReport, SelectableChart, SelectableDataset } from '../../../types'
+import { FC, useEffect } from 'react'
+import { useQuery } from '@apollo/client'
+import { GET_DATASETS } from '../../../operations/queries/getDatasets'
+import styles from './Model.module.scss'
+import { Spin } from 'antd'
+import { updateReport } from '../../../operations/store'
+import ModelList from '../../ModelList'
 
-const Model = () => {
+interface IModel extends SelectableChart, IReport, SelectableDataset {}
+
+const Model: FC<IModel> = ({ selectedChart, selectedDataset, id }) => {
+  const reportId = id
+  const { error, loading, data } = useQuery(GET_DATASETS, { variables: { reportId } })
+
+  useEffect(() => {
+    if (!selectedDataset) {
+      if (data?.datasets) {
+        updateReport({ selectedDataset: data.datasets[0].id }, { reportId })
+      }
+    }
+  }, [data, selectedDataset])
+
+  if (error) {
+    return (
+      <div>An error occured.</div>
+    )
+  }
+
+  if (loading) {
+    return (
+      <div className={styles.Model}>
+        <Spin />
+      </div>
+    )
+  }
+
   return (
     <>
       <TopMenu/>
@@ -9,14 +46,14 @@ const Model = () => {
       <Playground>
         <Playground.Body>
           <Playground.Canvas>
-            <div>Canvas</div>
+            <ModelList datasets={data.datasets}/>
           </Playground.Canvas>
           <Playground.Sidebars>
             <RightSidebar key="Properties" title="Properties">
               <div>Properties</div>
             </RightSidebar>
             <RightSidebar key="Fields" title="Fields">
-              <div>Fields</div>
+              <FieldPane selectedChart={selectedChart} datasets={data.datasets}/>
             </RightSidebar>
           </Playground.Sidebars>
         </Playground.Body>
@@ -25,4 +62,4 @@ const Model = () => {
   )
 }
 
-export default Model
+export default DataLoader(Model)

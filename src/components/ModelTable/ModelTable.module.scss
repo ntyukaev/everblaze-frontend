@@ -1,0 +1,7 @@
+.ModelTable {
+  @include border($top: true,
+    $right: true,
+    $bottom: true,
+    $left: true,
+    $color: $secondary-color)
+}
