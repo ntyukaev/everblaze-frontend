@@ -1,16 +1,22 @@
 import { useDrag } from 'react-dnd'
-import updateField from '../../operations/store/updateField'
-import { ColumnDropResult, DragTypeEnum, Identity } from '../../types'
-import styles from './ChartColumn.module.scss'
+import { updateField } from '../../operations/store/field'
+import { ColumnDropResultImpl, Identifiable } from '../../ts/interfaces'
+import { DragTypeEnum } from '../../ts/enums'
 
-const ChartColumn = ({ id, name }: { name: string, id: Identity }) => {
+import styles from './ChartColumn.module.scss'
+import { FC } from 'react'
+
+interface ChartColumnImpl extends Identifiable {
+  name: string
+}
+
+const ChartColumn: FC<ChartColumnImpl> = ({ id, name }) => {
   const [{ isDragging }, drag] = useDrag(() => ({
     type: DragTypeEnum.COLUMN,
     item: { id },
     end: (item, monitor) => {
-      const dropResult = monitor.getDropResult<ColumnDropResult>()
+      const dropResult = monitor.getDropResult<ColumnDropResultImpl>()
       if (item && dropResult) {
-        // console.log(`You dropped ${item.id} into ${dropResult.type}!`)
         updateField({ type: dropResult.type }, id)
       }
     },

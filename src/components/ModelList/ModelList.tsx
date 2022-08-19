@@ -1,13 +1,13 @@
 import { FC } from 'react'
-import { IDataset } from '../../types'
+import { DatasetImpl } from '../../ts/interfaces'
 import ModelTable from '../ModelTable'
 import styles from './ModelList.module.scss'
 
-interface IModelList {
-  datasets: IDataset[]
+interface ModelListImpl {
+  datasets: DatasetImpl[]
 }
 
-const ModelList: FC<IModelList> = ({ datasets }) => {
+const ModelList: FC<ModelListImpl> = ({ datasets }) => {
   console.log(datasets)
   return (
     <div className={styles.ModelList}>

@@ -1,7 +1,8 @@
 import { FC, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { Spin } from 'antd'
-import { createSheet, updateReport } from '../../../operations/store'
+import { createSheet } from '../../../operations/store/sheet'
+import { updateReport } from '../../../operations/store/report'
 import { TopMenu, Playground, TabList, ViewToolbar, BottomInfo, RightSidebar } from '../../Layout'
 import ScaleOnCtrlWheel from '../../ScaleOnCtrlWheel'
 import DataLoader from '../../DataLoader'
@@ -11,15 +12,15 @@ import SheetList from '../../SheetList'
 import styles from './Report.module.scss'
 import { ScaleConfig } from '../../ScaleOnCtrlWheel/scaleReducer'
 import VisualizationPane from '../../VisualizationPane'
-import { IReport, SelectableChart, SelectableDataset, SelectableSheet } from '../../../types'
+import { ReportImpl, SelectableChart, SelectableDataset, SelectableSheet } from '../../../ts/interfaces'
 import FieldPane from '../../FieldPane'
 import { GET_SHEETS_AND_DATASETS } from '../../../operations/queries/getSheetsAndDatasets'
-interface IReportWithScale extends IReport, SelectableSheet, SelectableChart, SelectableDataset {
+interface ReportWithScale extends ReportImpl, SelectableSheet, SelectableChart, SelectableDataset {
   scaleConfig: ScaleConfig,
   setScale: Function
 }
 
-const Report: FC<IReportWithScale> = ({ id, name, selectedDataset, selectedChart, selectedSheet, scaleConfig, setScale }) => {
+const Report: FC<ReportWithScale> = ({ id, name, selectedDataset, selectedChart, selectedSheet, scaleConfig, setScale }) => {
   const reportId = id
   const { error, loading, data } = useQuery(GET_SHEETS_AND_DATASETS, { variables: { reportId } })
   useEffect(() => {

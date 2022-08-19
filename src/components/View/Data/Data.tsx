@@ -5,14 +5,14 @@ import Spreadsheet from '../../Spreadsheet'
 import { GET_DATASETS } from '../../../operations/queries/getDatasets'
 import styles from './Data.module.scss'
 import { useQuery } from '@apollo/client'
-import { IReport, SelectableDataset } from '../../../types'
+import { ReportImpl, SelectableDataset } from '../../../ts/interfaces'
 import { FC, useEffect } from 'react'
-import { updateReport } from '../../../operations/store'
+import { updateReport } from '../../../operations/store/report'
 import FieldPane from '../../FieldPane'
 
-interface IData extends IReport, SelectableDataset {}
+interface DataImpl extends ReportImpl, SelectableDataset {}
 
-const Data: FC<IData> = ({ id, selectedDataset }) => {
+const Data: FC<DataImpl> = ({ id, selectedDataset }) => {
   const reportId = id
   const { error, loading, data } = useQuery(GET_DATASETS, { variables: { reportId } })
   useEffect(() => {

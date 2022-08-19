@@ -1,12 +1,13 @@
 import { Button } from 'antd'
 import { FC } from 'react'
-import { createChart, updateChart } from '../../operations/store'
-import { ChartTypeEnum, SelectableChart, SelectableSheet } from '../../types'
+import { createChart, updateChart } from '../../operations/store/chart'
+import { ChartTypeEnum } from '../../ts/enums'
+import { SelectableChart, SelectableSheet } from '../../ts/interfaces'
 import ChartFieldList from '../ChartFieldList'
 
-interface IVisualizationPane extends SelectableSheet, SelectableChart {}
+interface VisualizationPaneImpl extends SelectableSheet, SelectableChart {}
 
-const VisualizationPane: FC<IVisualizationPane> = ({ selectedSheet, selectedChart }) => {
+const VisualizationPane: FC<VisualizationPaneImpl> = ({ selectedSheet, selectedChart }) => {
   const handleCreateChart = () => {
     createChart({ type: ChartTypeEnum.LINE_CHART, x: 0, y: 0, width: 0.3, height: 0.3 }, { sheetId: selectedSheet })
   }

@@ -1,13 +1,14 @@
 import { FC } from 'react'
-import { IDataset, NullableIdentity } from '../../types'
+import { DatasetImpl } from '../../ts/interfaces'
+import { NullableIdentity } from '../../ts/types'
 import DatasetList from '../DatasetList'
 
-interface IFieldPane {
+interface FieldPaneImpl {
   selectedChart?: NullableIdentity,
-  datasets: IDataset[]
+  datasets: DatasetImpl[]
 }
 
-const FieldPane: FC<IFieldPane> = ({ selectedChart, datasets }) => {
+const FieldPane: FC<FieldPaneImpl> = ({ selectedChart, datasets }) => {
   return (
     <div>
       <DatasetList selectedChart={selectedChart} datasets={datasets}/>

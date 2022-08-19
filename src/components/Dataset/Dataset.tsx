@@ -1,8 +1,9 @@
 import { FC } from 'react'
-import { IDataset, Identity, NullableIdentity } from '../../types'
+import { DatasetImpl } from '../../ts/interfaces'
+import { Identity, NullableIdentity } from '../../ts/types'
 import DatasetColumn from '../DatasetColumn'
 
-interface HasUsedColumns extends IDataset {
+interface HasUsedColumns extends DatasetImpl {
   usedColumnIds: Identity[],
   selectedChart?: NullableIdentity
 }

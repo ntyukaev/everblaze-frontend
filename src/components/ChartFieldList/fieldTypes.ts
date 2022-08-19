@@ -1,4 +1,4 @@
-import { ChartTypeEnum, FieldTypeEnum } from './../../types/index'
+import { ChartTypeEnum, FieldTypeEnum } from '../../ts/enums'
 
 const fieldTypes = {
   [ChartTypeEnum.LINE_CHART]: [FieldTypeEnum.X, FieldTypeEnum.Y],

@@ -1,4 +1,4 @@
-import { Scalable } from './../../types/index'
+import { Scalable } from '../../ts/interfaces'
 
 export interface ScaleConfig extends Scalable {
   minScale: number,

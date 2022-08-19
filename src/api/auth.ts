@@ -1,4 +1,4 @@
-import { LoginInput, RegisterInput, UserProps } from './../types/index'
+import { LoginInput, RegisterInput, UserInfoImpl } from '../ts/interfaces'
 import axios from './axios'
 
 /* eslint-disable camelcase */
@@ -18,7 +18,7 @@ export const login = ({ email, password }: LoginInput) => {
   })
 }
 
-export const saveUser = (user: UserProps) => {
+export const saveUser = (user: UserInfoImpl) => {
   localStorage.setItem('user', JSON.stringify(user))
 }
 

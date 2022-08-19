@@ -1,18 +1,20 @@
 import { FC, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useQuery } from '@apollo/client'
-import { ChartsData, ChartsVars, GET_CHARTS } from '../../operations/queries/getCharts'
+import { GET_CHARTS } from '../../operations/queries/getCharts'
+import { CrudEnum } from '../../ts/enums'
+import { ChartsData, ChartsVars, Scalable, SelectableChart, SelectableSheet } from '../../ts/interfaces'
 import Chart from '../Chart'
 import styles from './ChartList.module.scss'
-import { CrudEnum, Identity, Scalable, SelectableChart, SelectableSheet } from '../../types'
-import { updateReport } from '../../operations/store'
+import { Identity } from '../../ts/types'
+import { updateReport } from '../../operations/store/report'
 import BoundingLines from '../BoundingLines/BoundingLines'
 import { GridHelper } from './utils'
 
-interface IChartList extends SelectableSheet, SelectableChart, Scalable {
+interface ChartListImpl extends SelectableSheet, SelectableChart, Scalable {
   reportId: Identity
 }
 
-const ChartList: FC<IChartList> = ({ reportId, selectedChart, selectedSheet, scale }) => {
+const ChartList: FC<ChartListImpl> = ({ reportId, selectedChart, selectedSheet, scale }) => {
   const [height, setHeight] = useState(0)
   const [width, setWidth] = useState<number>(0)
   const [gridConfig, setGridConfig] = useState<{bounds: number[][][], grid: [number, number]}>({ grid: [1, 1], bounds: [] })

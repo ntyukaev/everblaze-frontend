@@ -1,20 +1,22 @@
 import { FC } from 'react'
 import { useDrag } from 'react-dnd'
-import { createField } from '../../operations/store'
-import { ColumnDropResult, DragTypeEnum, IColumn, NullableIdentity } from '../../types'
+import { createField } from '../../operations/store/field'
+import { DragTypeEnum } from '../../ts/enums'
+import { ColumnDropResultImpl, ColumnImpl } from '../../ts/interfaces'
+import { NullableIdentity } from '../../ts/types'
 import styles from './DatasetColumn.module.scss'
-interface IDatasetColumn extends IColumn {
+interface DatasetColumnImpl extends ColumnImpl {
   active: boolean,
   selectedChart?: NullableIdentity
 }
 
-const DatasetColumn: FC<IDatasetColumn> = ({ id, selectedChart, name }) => {
+const DatasetColumn: FC<DatasetColumnImpl> = ({ id, selectedChart, name }) => {
   console.log(id)
   const [{ isDragging }, drag] = useDrag(() => ({
     type: DragTypeEnum.COLUMN,
     item: { id },
     end: (item, monitor) => {
-      const dropResult = monitor.getDropResult<ColumnDropResult>()
+      const dropResult = monitor.getDropResult<ColumnDropResultImpl>()
       if (item && dropResult && selectedChart) {
         console.log(selectedChart)
         console.log(`You dropped ${item.id} into ${dropResult.type}!`)

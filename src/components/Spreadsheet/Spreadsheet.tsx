@@ -1,11 +1,11 @@
 import { HotTable } from '@handsontable/react'
 import { FC } from 'react'
-import { readDataset } from '../../operations/store'
-import { IColumn, SelectableDataset } from '../../types'
+import { readDataset } from '../../operations/store/dataset'
+import { SelectableDataset, ColumnImpl } from '../../ts/interfaces'
 
-interface ISpreadsheet extends SelectableDataset {}
+interface SpreadsheetImpl extends SelectableDataset {}
 
-const generateData = (columns:IColumn[]) => {
+const generateData = (columns:ColumnImpl[]) => {
   const result: any = Array.from({ length: columns[0].cells.length }, () => [])
   columns.forEach((column) => {
     const columnIndex = column.index
@@ -16,17 +16,17 @@ const generateData = (columns:IColumn[]) => {
   return result
 }
 
-const getColHeaders = (columns: IColumn[]) => {
+const getColHeaders = (columns: ColumnImpl[]) => {
   return [...columns].sort((o1, o2) => o1.index > o2.index ? 1 : -1).map(col => col.name)
 }
 
-const Spreadsheet: FC<ISpreadsheet> = ({ selectedDataset }) => {
+const Spreadsheet: FC<SpreadsheetImpl> = ({ selectedDataset }) => {
   if (!selectedDataset) {
     return null
   }
   const dataset = readDataset(selectedDataset)
-  const data = generateData(dataset.columns)
-  const colHeaders = getColHeaders(dataset.columns)
+  const data = generateData(dataset!.columns)
+  const colHeaders = getColHeaders(dataset!.columns)
 
   return (
     <div>

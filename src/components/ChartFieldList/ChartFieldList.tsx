@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/client'
 import { FC } from 'react'
-import { FieldsData, FieldsVars, GET_FIELDS } from '../../operations/queries/getFields'
-import { readChart } from '../../operations/store'
-import { SelectableChart } from '../../types'
+import { GET_FIELDS } from '../../operations/queries/getFields'
+import { FieldsData, FieldsVars, SelectableChart } from '../../ts/interfaces'
+import { readChart } from '../../operations/store/chart'
 import ChartField from '../ChartField/ChartField'
 import fieldTypes from './fieldTypes'
 
-interface IChartFieldList extends SelectableChart {}
+interface ChartFieldListImpl extends SelectableChart {}
 
-const ChartFieldList: FC<IChartFieldList> = ({ selectedChart }) => {
+const ChartFieldList: FC<ChartFieldListImpl> = ({ selectedChart }) => {
   const chart = readChart(selectedChart)
   const { error, loading, data } = useQuery<FieldsData, FieldsVars>(GET_FIELDS, { variables: { chartId: selectedChart } })
   if (error) {

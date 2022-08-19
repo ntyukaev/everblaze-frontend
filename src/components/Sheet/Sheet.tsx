@@ -1,6 +1,7 @@
 import { FC } from 'react'
 import styled from 'styled-components'
-import { Identity, Scalable, SelectableChart, SelectableSheet } from '../../types'
+import { Identity } from '../../ts/types'
+import { Scalable, SelectableChart, SelectableSheet } from '../../ts/interfaces'
 import ChartList from '../ChartList'
 import styles from './Sheet.module.scss'
 
@@ -11,11 +12,11 @@ const ScalableSheetContainer = styled.div<IScalableSheetContainer>`
   overflow: hidden;
 `
 
-interface ISheet extends SelectableSheet, SelectableChart, Scalable {
+interface SheetImpl extends SelectableSheet, SelectableChart, Scalable {
   reportId: Identity
 }
 
-const Sheet: FC<ISheet> = ({ selectedSheet, selectedChart, scale, reportId }) => {
+const Sheet: FC<SheetImpl> = ({ selectedSheet, selectedChart, scale, reportId }) => {
   return (
     <div className={styles.Sheet}>
       <ScalableSheetContainer scale={scale} className={styles.ScalableSheetContainer}>

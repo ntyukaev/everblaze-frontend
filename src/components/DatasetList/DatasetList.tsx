@@ -1,15 +1,16 @@
 import { useQuery } from '@apollo/client'
 import { FC } from 'react'
-import { FieldsData, FieldsVars, GET_FIELDS } from '../../operations/queries/getFields'
-import { IDataset, NullableIdentity } from '../../types'
+import { GET_FIELDS } from '../../operations/queries/getFields'
+import { FieldsData, FieldsVars, DatasetImpl } from '../../ts/interfaces'
+import { NullableIdentity } from '../../ts/types'
 import Dataset from '../Dataset/Dataset'
 
-interface IDatasetList {
-  datasets: IDataset[],
+interface DatasetListImpl {
+  datasets: DatasetImpl[],
   selectedChart?: NullableIdentity
 }
 
-const DatasetList:FC<IDatasetList> = ({ selectedChart, datasets }) => {
+const DatasetList:FC<DatasetListImpl> = ({ selectedChart, datasets }) => {
   const { error, loading, data } = useQuery<FieldsData, FieldsVars>(GET_FIELDS,
     { variables: { chartId: selectedChart || null }, skip: !selectedChart })
   if (error) {

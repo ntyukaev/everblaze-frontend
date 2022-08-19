@@ -1,18 +1,18 @@
 import { TopMenu, Playground, ViewToolbar, RightSidebar, BottomInfo } from '../../Layout'
 import FieldPane from '../../FieldPane'
 import DataLoader from '../../DataLoader'
-import { IReport, SelectableChart, SelectableDataset } from '../../../types'
+import { ReportImpl, SelectableChart, SelectableDataset } from '../../../ts/interfaces'
 import { FC, useEffect } from 'react'
 import { useQuery } from '@apollo/client'
 import { GET_DATASETS } from '../../../operations/queries/getDatasets'
 import styles from './Model.module.scss'
 import { Spin } from 'antd'
-import { updateReport } from '../../../operations/store'
+import { updateReport } from '../../../operations/store/report'
 import ModelList from '../../ModelList'
 
-interface IModel extends SelectableChart, IReport, SelectableDataset {}
+interface ModelImpl extends SelectableChart, ReportImpl, SelectableDataset {}
 
-const Model: FC<IModel> = ({ selectedChart, selectedDataset, id }) => {
+const Model: FC<ModelImpl> = ({ selectedChart, selectedDataset, id }) => {
   const reportId = id
   const { error, loading, data } = useQuery(GET_DATASETS, { variables: { reportId } })
 

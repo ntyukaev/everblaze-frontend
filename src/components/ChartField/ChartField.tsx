@@ -1,11 +1,12 @@
 import { FC } from 'react'
 import { useDrop } from 'react-dnd'
-import { DragTypeEnum, FieldTypeEnum, IField } from '../../types'
+import { DragTypeEnum, FieldTypeEnum } from '../../ts/enums'
+import { FieldImpl } from '../../ts/interfaces'
 import ChartColumn from '../ChartColumn'
 import styles from './ChartField.module.scss'
 
 type IChartField = {
-  fields: IField[],
+  fields: FieldImpl[],
   type: keyof typeof FieldTypeEnum
 }
 

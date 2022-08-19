@@ -1,5 +1,5 @@
 import { InMemoryCache, ApolloClient, gql } from '@apollo/client'
-import { CrudEnum } from './types'
+import { CrudEnum } from './ts/enums'
 
 const GRAPHQL_ENDPOINT = 'http://localhost:8000/graphql'
 

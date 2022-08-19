@@ -1,5 +1,7 @@
-import { IChart, Identity, NumericTriplet } from './../../types/index'
-import { readChart, updateChart } from '../../operations/store'
+import { ChartImpl } from '../../ts/interfaces'
+import { Identity, NumericTriplet } from '../../ts/types'
+import { readChart, updateChart } from '../../operations/store/chart'
+
 export class GridHelper {
   _gridX: number = 1
   _gridY: number = 1
@@ -23,7 +25,7 @@ export class GridHelper {
   readonly canvasPivotsX: NumericTriplet
   readonly canvasPivotsY: NumericTriplet
 
-  constructor (charts: IChart[], selectedChart: Identity, canvasHeight: number, canvasWidth: number) {
+  constructor (charts: ChartImpl[], selectedChart: Identity, canvasHeight: number, canvasWidth: number) {
     if (!selectedChart) {
       throw new Error('No chart is selected')
     }

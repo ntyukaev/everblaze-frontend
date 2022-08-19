@@ -1,14 +1,16 @@
+import { FC } from 'react'
 import { useQuery } from '@apollo/client'
 import { Rnd, RndDragCallback, RndResizeCallback, RndResizeStartCallback } from 'react-rnd'
 import { fieldsSameLength, getInputData, getColumnNames, getFieldMapping } from './utils'
-import { FieldsData, FieldsVars, GET_FIELDS } from '../../operations/queries/getFields'
+import { GET_FIELDS } from '../../operations/queries/getFields'
+import { FieldsData, FieldsVars, ChartImpl, Scalable, SelectableChart } from '../../ts/interfaces'
+import { Identity } from '../../ts/types'
 import ChartBuilder from '../ChartBuilder'
 import styles from './Chart.module.scss'
-import { FC } from 'react'
-import { IChart, Identity, Scalable, SelectableChart } from '../../types'
-import { updateChart, updateReport } from '../../operations/store'
+import { updateReport } from '../../operations/store/report'
+import { updateChart } from '../../operations/store/chart'
 
-interface ChartWithScale extends Scalable, IChart, SelectableChart {
+interface ChartWithScale extends Scalable, ChartImpl, SelectableChart {
   reportId: Identity,
   setChartUpdating: Function,
   height: number,

@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { Rnd } from 'react-rnd'
-import { IDataset } from '../../types'
+import { DatasetImpl } from '../../ts/interfaces'
 import styles from './ModelTable.module.scss'
 
-const ModelTable: FC<IDataset> = ({ name, columns }) => {
+const ModelTable: FC<DatasetImpl> = ({ name, columns }) => {
   return (
     <Rnd
     bounds='parent'

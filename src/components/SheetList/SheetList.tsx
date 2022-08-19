@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import { Button } from 'antd'
 import styles from './SheetList.module.scss'
-import { ISheet, SelectableSheet } from '../../types'
+import { SheetImpl, SelectableSheet } from '../../ts/interfaces'
 
-interface ISheetList extends SelectableSheet {
-  sheets: ISheet[]
+interface SheetListImpl extends SelectableSheet {
+  sheets: SheetImpl[]
 }
 
-const SheetList: FC<ISheetList> = ({ sheets, selectedSheet }) => {
+const SheetList: FC<SheetListImpl> = ({ sheets, selectedSheet }) => {
   return (
     <div className={styles.SheetList}>
       {sheets.map((sheet) => <Button type='text' key={sheet.index}

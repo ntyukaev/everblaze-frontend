@@ -1,4 +1,4 @@
-import { ChartTypeEnum } from '../../types'
+import { ChartTypeEnum } from '../../ts/enums'
 import LineChart from './LineChart'
 
 const chartTypes = {
