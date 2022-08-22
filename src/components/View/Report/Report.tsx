@@ -65,7 +65,7 @@ const Report: FC<ReportWithScale> = ({ id, name, selectedDataset, selectedChart,
             <Sheet reportId={reportId} scale={scaleConfig.scale}
               selectedChart={selectedChart} selectedSheet={selectedSheet} />
             <TabList>
-              <SheetList selectedSheet={selectedSheet} sheets={data.sheets} />
+              <SheetList reportId={reportId} selectedSheet={selectedSheet} sheets={data.sheets} />
             </TabList>
           </Playground.Canvas>
           <Playground.Sidebars>

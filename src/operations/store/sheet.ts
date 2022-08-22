@@ -1,9 +1,13 @@
+import { getNewId } from './utils'
 import apollo from '../../apollo'
 import { GET_SHEETS } from '../queries/getSheets'
-import { Identity, SheetProps } from '../../ts/types'
+import { Identity } from '../../ts/types'
+import { SheetImpl } from '../../ts/interfaces'
+
+interface SheetParams extends Partial<SheetImpl> {}
 
 interface CreateSheetImpl {
-  (data: SheetProps, variables: { reportId: Identity }): void
+  (data: SheetParams, variables: { reportId: Identity }): void
 }
 
 export const createSheet: CreateSheetImpl = (data, variables) => {
@@ -13,7 +17,7 @@ export const createSheet: CreateSheetImpl = (data, variables) => {
     data: {
       sheets: [
         ...sheets,
-        { __typename: 'Sheet', ...data }
+        { __typename: 'Sheet', id: getNewId(), ...data }
       ]
     },
     variables

@@ -1,0 +1,12 @@
+.SheetButton {
+  display: inline-block;
+  height: 100%;
+}
+
+.SheetButtonInner {
+  height: 100% !important;
+}
+
+.SheetButtonActive {
+  @include border($bottom: true, $color: $orange, $width: 0.15rem);
+}

@@ -1,3 +1,11 @@
+.SheetList {
+  height: 100%;
+}
+
+.SheetListAddSheet {
+  display: inline-block;
+}
+
 .SheetActive {
   @include border($bottom: true, $color: $orange, $width: 0.2rem);
 }
