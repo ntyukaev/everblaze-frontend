@@ -8,7 +8,6 @@ interface ModelListImpl {
 }
 
 const ModelList: FC<ModelListImpl> = ({ datasets }) => {
-  console.log(datasets)
   return (
     <div className={styles.ModelList}>
       { datasets.map(dataset => <ModelTable {...dataset} key={dataset.id}/>) }

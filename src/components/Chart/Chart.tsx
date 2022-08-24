@@ -96,7 +96,6 @@ const Chart: FC<ChartWithScale> = ({ type, id }) => {
 
   const columnNames = getColumnNames(data!.fields)
   const inputData = getInputData(data!.fields, columnNames)
-  console.log(inputData)
   const fieldMapping = getFieldMapping(data!.fields, columnNames)
 
   return (

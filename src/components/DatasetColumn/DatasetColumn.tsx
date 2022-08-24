@@ -11,13 +11,14 @@ interface DatasetColumnImpl extends ColumnImpl {
 }
 
 const DatasetColumn: FC<DatasetColumnImpl> = ({ id, selectedChart, name }) => {
+  console.log('Initial setup', selectedChart)
   const [{ isDragging }, drag] = useDrag(() => ({
     type: DragTypeEnum.COLUMN,
     item: { id },
     end: (item, monitor) => {
+      console.log('In end', selectedChart)
       const dropResult = monitor.getDropResult<ColumnDropResultImpl>()
       if (item && dropResult && selectedChart) {
-        console.log(selectedChart)
         console.log(`You dropped ${item.id} into ${dropResult.type}!`)
         createField(dropResult.type, selectedChart, item.id)
         // updateField({ type: dropResult.type }, id)
@@ -27,7 +28,7 @@ const DatasetColumn: FC<DatasetColumnImpl> = ({ id, selectedChart, name }) => {
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId()
     })
-  }))
+  }), [selectedChart])
   return (
     <div ref={drag} className={`${styles.DatasetColumn}` + (isDragging ? ` ${styles.DatasetColumnActive}` : '')}>
       <div className={styles.DatasetColumnActive}>{name}</div>
