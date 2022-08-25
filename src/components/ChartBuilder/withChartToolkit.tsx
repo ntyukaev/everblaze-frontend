@@ -20,7 +20,7 @@ export interface EnchancedChart extends IChart {
 const withChartToolkit = (Component:FC<EnchancedChart>) => {
   const EnchancedChart:FC<IChart> = ({ data, fields }) => {
     function * generateColor () {
-      const frequency = 0.1
+      const frequency = 0.5
       while (true) {
         for (let i = 0; i < 32; i++) {
           const r = Math.sin(frequency * i + 0) * 127 + 128

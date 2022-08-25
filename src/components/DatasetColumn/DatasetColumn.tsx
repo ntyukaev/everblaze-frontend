@@ -11,7 +11,6 @@ interface DatasetColumnImpl extends ColumnImpl {
 }
 
 const DatasetColumn: FC<DatasetColumnImpl> = ({ id, selectedChart, name }) => {
-  console.log('Initial setup', selectedChart)
   const [{ isDragging }, drag] = useDrag(() => ({
     type: DragTypeEnum.COLUMN,
     item: { id },
