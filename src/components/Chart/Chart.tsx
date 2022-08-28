@@ -48,6 +48,11 @@ const withDraggable = (Component: any) => function withDraggable ({ canvasHeight
     updateChart({ width, height }, id)
   }
 
+  const handleResizeStop:RndResizeCallback = () => {
+    updateReport({ selectedChart: id }, { reportId })
+    setChartUpdating(false)
+  }
+
   return (
     <Rnd
       size={{ width: width * canvasWidth, height: height * canvasHeight }}
@@ -60,6 +65,7 @@ const withDraggable = (Component: any) => function withDraggable ({ canvasHeight
       onDragStop={handleDragStop}
       onResizeStart={handleResizeStart}
       onResize={handleResize}
+      onResizeStop={handleResizeStop}
       bounds='parent'
       scale={scale}
       className={`${styles.Chart}` + (selectedChart === id ? ` ${styles.ChartSelected}` : '')}
