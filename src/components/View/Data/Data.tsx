@@ -16,7 +16,6 @@ const Data: FC<DataImpl> = ({ id, selectedDataset }) => {
   const reportId = id
   const { error, loading, data } = useQuery(GET_DATASETS, { variables: { reportId } })
   useEffect(() => {
-    console.log(data?.datasets, data)
     if (!selectedDataset) {
       if (data?.datasets) {
         updateReport({ selectedDataset: data.datasets[0].id }, { reportId })

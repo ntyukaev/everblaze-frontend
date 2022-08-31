@@ -6,6 +6,7 @@ export const CELL_FIELDS = gql`
     index
     type
     value
+    status @client
   }
 `
 

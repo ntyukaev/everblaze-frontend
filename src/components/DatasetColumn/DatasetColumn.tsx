@@ -15,12 +15,9 @@ const DatasetColumn: FC<DatasetColumnImpl> = ({ id, selectedChart, name }) => {
     type: DragTypeEnum.COLUMN,
     item: { id },
     end: (item, monitor) => {
-      console.log('In end', selectedChart)
       const dropResult = monitor.getDropResult<ColumnDropResultImpl>()
       if (item && dropResult && selectedChart) {
-        console.log(`You dropped ${item.id} into ${dropResult.type}!`)
         createField(dropResult.type, selectedChart, item.id)
-        // updateField({ type: dropResult.type }, id)
       }
     },
     collect: (monitor) => ({

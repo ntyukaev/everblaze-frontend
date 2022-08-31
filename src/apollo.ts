@@ -43,6 +43,15 @@ export const cache = new InMemoryCache({
           }
         }
       }
+    },
+    Cell: {
+      fields: {
+        status: {
+          read (_) {
+            return _ || CrudEnum.READ
+          }
+        }
+      }
     }
   }
 })
